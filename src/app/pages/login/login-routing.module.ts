@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { MapPage } from './map.page';
+import { Routes, RouterModule } from '@angular/router';
+
+import { LoginPage } from './login.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: MapPage,
-  },
+    component: LoginPage
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class Tab2PageRoutingModule {}
+export class LoginPageRoutingModule {}

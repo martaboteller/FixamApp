@@ -1,0 +1,36 @@
+<ion-app>
+  <!--Side menu zone-->
+  <ion-menu side="start" contentId="content">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title class="menu-title">Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <!--List of items inside sidemenu-->
+    <ion-content>
+      <ion-list>
+        <ion-menu-toggle auto-hide="false" *ngFor="let p of pages">
+          <ion-item
+            routerDirection="root"
+            [routerLink]="p.url"
+            [class.active-menu]="active === p.url"
+          >
+            {{p.title}}
+            <ion-icon
+              slot="start"
+              [ios]="p.icon + '-outline'"
+              [md]="p.icon + '-sharp'"
+            ></ion-icon>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-item tappable routerLink="/login" routerDirection="root">
+          <ion-icon name="log-out" slot="start"> </ion-icon>Logout</ion-item
+        >
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <!--Page content-->
+  <ion-router-outlet id="content" main></ion-router-outlet>
+</ion-app>
