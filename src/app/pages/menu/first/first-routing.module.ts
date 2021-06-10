@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ListPage } from './list.page';
+import { FirstPage } from './first.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: ListPage,
+    component: FirstPage,
     children: [
       {
         path: 'list',
@@ -20,7 +20,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/list',
+        redirectTo: 'list',
         pathMatch: 'full',
       },
     ],
@@ -36,4 +36,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ListPageRoutingModule {}
+export class FirstPageRoutingModule {}

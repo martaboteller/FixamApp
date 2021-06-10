@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SidenavPageRoutingModule } from './sidenav-routing.module';
+import { FirstPageRoutingModule } from './first-routing.module';
 
-import { SidenavPage } from './sidenav.page';
+import { FirstPage } from './first.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SidenavPageRoutingModule
+    FirstPageRoutingModule
   ],
-  declarations: [SidenavPage]
+  declarations: [FirstPage]
 })
-export class SidenavPageModule {}
+export class FirstPageModule {}

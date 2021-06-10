@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { SidenavPage } from './sidenav.page';
+import { FirstPage } from './first.page';
 
-describe('SidenavPage', () => {
-  let component: SidenavPage;
-  let fixture: ComponentFixture<SidenavPage>;
+describe('FirstPage', () => {
+  let component: FirstPage;
+  let fixture: ComponentFixture<FirstPage>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SidenavPage ],
+      declarations: [ FirstPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SidenavPage);
+    fixture = TestBed.createComponent(FirstPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
