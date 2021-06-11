@@ -11,12 +11,12 @@ const routes: Routes = [
       {
         path: 'list',
         loadChildren: () =>
-          import('../list/list.module').then((m) => m.ListPageModule),
+          import('./list/list.module').then((m) => m.ListPageModule),
       },
       {
         path: 'map',
         loadChildren: () =>
-          import('../map/map.module').then((m) => m.MapPageModule),
+          import('./map/map.module').then((m) => m.MapPageModule),
       },
       {
         path: '',
@@ -27,7 +27,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/list',
+    redirectTo: 'list',
     pathMatch: 'full',
   },
 ];
