@@ -1,22 +1,42 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>List Page</ion-title>
-    <ion-buttons slot="start">
-      <ion-menu-button autoHide="false"></ion-menu-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-<ion-tabs>
-  <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="list">
-      <ion-icon name="sunny"></ion-icon>
-      <ion-label>List</ion-label>
-    </ion-tab-button>
-    <ion-tab-button tab="map">
-      <ion-icon name="moon"></ion-icon>
-      <ion-label>Map</ion-label>
-    </ion-tab-button>
-  </ion-tab-bar>
-</ion-tabs>
+<ion-app>
+  <ion-header>
+    <ion-toolbar color="secondary">
+      <ion-title>List Page</ion-title>
+      <ion-buttons slot="start">
+        <ion-menu-button autoHide="false"></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="list">
+        <ion-icon name="sunny"></ion-icon>
+        <ion-label>List</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="map">
+        <ion-icon name="moon"></ion-icon>
+        <ion-label>Map</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
 
-<ion-content> </ion-content>
+  <ion-content>
+    <ion-row>
+      <ion-col
+        sizeLg="4"
+        sizeMd="4"
+        sizeXs="6"
+        *ngFor="let c of listOfCaptures"
+        color="red"
+      >
+        <ion-card class="favCard">
+          <img src="assets/img/basic.png" />
+          <ion-card-content>
+            <ion-card-title> {{c.name}} </ion-card-title>
+            <p>{{c.description}}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-content>
+</ion-app>

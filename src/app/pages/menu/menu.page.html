@@ -16,17 +16,34 @@
               routerDirection="root"
               [routerLink]="p.url"
               [class.active-item]="selectedPath.startsWith(p.url)"
+              lines="full"
             >
               {{p.title}}
               <ion-icon slot="start" [name]="p.icon"></ion-icon>
             </ion-item>
           </ion-menu-toggle>
 
-          <ion-item tappable routerLink="/welcome" routerDirection="root">
+          <ion-item
+            lines="full"
+            tappable
+            routerLink="/welcome"
+            routerDirection="root"
+          >
             <ion-icon name="log-out" slot="start"> </ion-icon>Logout</ion-item
           >
         </ion-list>
       </ion-content>
+      <ion-list>
+        <ion-item style="padding-bottom: 2%" lines="none">
+          <ion-icon slot="start" name="moon"></ion-icon>
+          <ion-label> Toggle Dark Theme </ion-label>
+          <ion-toggle
+            id="themeToggle"
+            [(ngModel)]="darkMode"
+            slot="end"
+          ></ion-toggle>
+        </ion-item>
+      </ion-list>
     </ion-menu>
     <!--Page content-->
     <ion-router-outlet id="content" main></ion-router-outlet>

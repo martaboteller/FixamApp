@@ -1,3 +1,11 @@
 .active-item {
   border-left: 8px solid var(--ion-color-primary);
 }
+
+ion-toggle {
+  --background: rgb(121, 121, 121);
+  --background-checked: rgb(58, 59, 60);
+
+  --handle-background: #91111d;
+  --handle-background-checked: rgb(58, 59, 60);
+}
