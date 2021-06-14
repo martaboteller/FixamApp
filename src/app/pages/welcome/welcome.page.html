@@ -1,32 +1,33 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>Welcome page</ion-title>
+    <ion-title class="header_title"><p>Welcome page</p></ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-button
-    expand="block"
-    style="
-      margin-left: 40%;
-      margin-right: 40%;
-      margin-top: 20%;
-      text-align: center;
-    "
-    routerLink="login"
-    routerDirection="root"
-    >Login</ion-button
-  >
-  <ion-button
-    expand="block"
-    style="
-      margin-left: 40%;
-      margin-right: 40%;
-      margin-top: 5%;
-      text-align: center;
-    "
-    routerLink="registration"
-    routerDirection="root"
-    >Registration</ion-button
-  >
+  <div>
+    <ion-img class="bgr" src="/assets/img/barcelona_background.png"> </ion-img>
+  </div>
+  <div class="col">
+    <div class="row" style="text-align: center; margin-top: 20%">
+      <ion-button
+        class="welcome_button"
+        size="medium"
+        color="secondary"
+        routerLink="login"
+        routerDirection="root"
+        >Login</ion-button
+      >
+    </div>
+    <div class="row" style="text-align: center; margin-top: 5%">
+      <ion-button
+        class="welcome_button"
+        color="secondary"
+        size="medium"
+        routerLink="registration"
+        routerDirection="root"
+        >Registration</ion-button
+      >
+    </div>
+  </div>
 </ion-content>

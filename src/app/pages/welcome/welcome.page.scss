@@ -1,0 +1,26 @@
+.bgr {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  position: fixed;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  object-fit: cover;
+}
+::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none;
+}
+
+.ion-no-border {
+  background-color: rgb(97, 25, 25);
+  opacity: 50%;
+}
+
+.header_title {
+  color: white;
+  font-size: 24px;
+}
+.welcome_button {
+  opacity: 80%;
+}

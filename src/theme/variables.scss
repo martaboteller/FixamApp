@@ -12,8 +12,8 @@
   --ion-color-primary-tint: #4c8dff;
 
   /** secondary **/
-  --ion-color-secondary: #91111d;
-  --ion-color-secondary-rgb: 61, 194, 255;
+  --ion-color-secondary: #611919;
+  --ion-color-secondary-rgb: 97, 25, 25;
   --ion-color-secondary-contrast: #ffffff;
   --ion-color-secondary-contrast-rgb: 255, 255, 255;
   --ion-color-secondary-shade: #580c13;
@@ -74,6 +74,11 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  /**Set the background of the toolbar transparent**/
+  --ion-toolbar-background: transparent;
+  --ion-title-color: white;
+  --ion-color-button: rgb(97, 25, 25);
 }
 
 @media (prefers-color-scheme: dark) {
