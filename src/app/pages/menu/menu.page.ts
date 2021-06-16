@@ -36,4 +36,14 @@ export class menuPage implements OnInit {
   }
 
   ngOnInit() {}
+
+  onToggleColorTheme(event) {
+    if (event.detail.checked) {
+      document.body.setAttribute('color-theme', 'dark');
+      console.log(event.detail.checked);
+    } else {
+      document.body.setAttribute('color-theme', 'light');
+      console.log(event.detail.checked);
+    }
+  }
 }
