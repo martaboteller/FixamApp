@@ -1,11 +1,15 @@
 .active-item {
-  border-left: 8px solid var(--ion-color-primary);
+  border-left: 8px solid var(--ion-color-medium);
 }
 
 ion-toggle {
-  --background: rgb(121, 121, 121);
-  --background-checked: rgb(58, 59, 60);
+  --background: var(--ion-color-medium);
+  --background-checked: var(--ion-color-secondary);
 
-  --handle-background: "secondary";
-  --handle-background-checked: rgb(58, 59, 60);
+  --handle-background: var(--ion-color-tertiary);
+  --handle-background-checked: var(--ion-color-tertiary);
+}
+
+ion-content {
+  --background: var(--ion-color-content);
 }

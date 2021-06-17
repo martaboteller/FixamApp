@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
+import { ThemeColorsService } from 'src/app/services/themeColors/themeColors.service';
 
 @Component({
   selector: 'app-menu',
@@ -7,6 +8,11 @@ import { Router, RouterEvent } from '@angular/router';
   styleUrls: ['./menu.page.scss'],
 })
 export class menuPage implements OnInit {
+  //Variables
+  selectedPath = '';
+  darkValue: any;
+
+  //Define array of pages
   pages = [
     {
       title: 'First',
@@ -25,9 +31,10 @@ export class menuPage implements OnInit {
     },
   ];
 
-  selectedPath = '';
-
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private themeColorsService: ThemeColorsService
+  ) {
     this.router.events.subscribe((event: RouterEvent) => {
       if (event && event.url) {
         this.selectedPath = event.url;
@@ -35,15 +42,17 @@ export class menuPage implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.darkValue = this.darkBookean;
+    //console.log(this.darkValue);
+  }
 
-  onToggleColorTheme(event) {
-    if (event.detail.checked) {
-      document.body.setAttribute('color-theme', 'dark');
-      console.log(event.detail.checked);
-    } else {
-      document.body.setAttribute('color-theme', 'light');
-      console.log(event.detail.checked);
-    }
+  get darkBookean() {
+    return this.themeColorsService.sharedDarkValue;
+  }
+
+  setTheme(ev) {
+    //console.log(ev);
+    this.themeColorsService.setAppTheme(ev.detail.checked);
   }
 }
