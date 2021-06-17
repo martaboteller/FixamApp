@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Capture } from 'src/app/interfaces/interfaces';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Injectable({
   providedIn: 'root',
@@ -74,7 +75,9 @@ export class CapturesService {
     },
   ];
 
-  constructor() {}
+  constructor(
+    private storage: AngularFireStorage
+  ) {}
 
   public getCaptures() {
     return this.capturesArray;

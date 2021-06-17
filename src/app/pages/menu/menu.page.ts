@@ -1,12 +1,17 @@
+/* eslint-disable no-underscore-dangle */
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
+import { User } from 'src/app/interfaces/interfaces';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.page.html',
   styleUrls: ['./menu.page.scss'],
 })
-export class menuPage implements OnInit {
+export class MenuPage implements OnInit {
+
+  userLogged: User;
   pages = [
     {
       title: 'First',
@@ -27,7 +32,10 @@ export class menuPage implements OnInit {
 
   selectedPath = '';
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private authService: AuthService
+    ) {
     this.router.events.subscribe((event: RouterEvent) => {
       if (event && event.url) {
         this.selectedPath = event.url;
@@ -35,7 +43,18 @@ export class menuPage implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+  }
+
+  takePhoto(){
+    alert('hola');
+  }
+
+  logout(){
+    this.authService.logout();
+    this.router.navigate(['welcome']);
+  }
 
   onToggleColorTheme(event) {
     if (event.detail.checked) {
