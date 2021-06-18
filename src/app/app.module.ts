@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { Storage } from '@ionic/storage';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +29,7 @@ import { AppComponent } from './app.component';
   ],
   providers: [
     Camera,
+    Storage,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
