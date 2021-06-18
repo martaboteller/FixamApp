@@ -26,7 +26,7 @@
           <ion-item
             lines="full"
             tappable
-            routerLink="/welcome"
+            (click)="logout()"
             routerDirection="root"
           >
             <ion-icon name="log-out" slot="start"> </ion-icon>Logout</ion-item
@@ -47,6 +47,17 @@
       </ion-list>
     </ion-menu>
     <!--Page content-->
-    <ion-router-outlet id="content" main></ion-router-outlet>
+    <ion-router-outlet id="content" main> </ion-router-outlet>
   </ion-split-pane>
+  <!--Fab button-->
+  <ion-fab
+    vertical="bottom"
+    horizontal="center"
+    slot="fixed"
+    style="margin-bottom: 15%"
+  >
+    <ion-fab-button (click)="takePhoto()">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-app>

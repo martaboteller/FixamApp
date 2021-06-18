@@ -1,5 +1,7 @@
 {
   "name": "fixamapp",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

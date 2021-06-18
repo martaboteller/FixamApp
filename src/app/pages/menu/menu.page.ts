@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
+import { User } from 'src/app/interfaces/interfaces';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { CapturesService } from 'src/app/services/captures/captures.service';
+
 import { ThemeColorsService } from 'src/app/services/themeColors/themeColors.service';
 
 @Component({
@@ -7,12 +11,10 @@ import { ThemeColorsService } from 'src/app/services/themeColors/themeColors.ser
   templateUrl: './menu.page.html',
   styleUrls: ['./menu.page.scss'],
 })
-export class menuPage implements OnInit {
-  //Variables
-  selectedPath = '';
-  darkValue: any;
+export class MenuPage implements OnInit {
 
-  //Define array of pages
+  userLogged: User;
+  darkValue: any;
   pages = [
     {
       title: 'First',
@@ -31,7 +33,11 @@ export class menuPage implements OnInit {
     },
   ];
 
+  selectedPath = '';
+
   constructor(
+    private authService: AuthService,
+    private captureService: CapturesService,
     private router: Router,
     private themeColorsService: ThemeColorsService
   ) {
@@ -45,6 +51,15 @@ export class menuPage implements OnInit {
   ngOnInit() {
     this.darkValue = this.darkBookean;
     //console.log(this.darkValue);
+  }
+
+  takePhoto(){
+    this.captureService.takePhoto();
+  }
+
+  logout(){
+    this.authService.logout();
+    this.router.navigate(['welcome']);
   }
 
   get darkBookean() {
