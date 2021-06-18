@@ -1,8 +1,9 @@
-/* eslint-disable no-underscore-dangle */
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
 import { User } from 'src/app/interfaces/interfaces';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { CapturesService } from 'src/app/services/captures/captures.service';
+
 
 @Component({
   selector: 'app-menu',
@@ -34,7 +35,8 @@ export class MenuPage implements OnInit {
 
   constructor(
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private captureService: CapturesService
     ) {
     this.router.events.subscribe((event: RouterEvent) => {
       if (event && event.url) {
@@ -48,7 +50,7 @@ export class MenuPage implements OnInit {
   }
 
   takePhoto(){
-    alert('hola');
+    this.captureService.takePhoto();
   }
 
   logout(){

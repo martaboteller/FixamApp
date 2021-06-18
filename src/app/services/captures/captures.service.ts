@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Capture } from 'src/app/interfaces/interfaces';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { AuthService } from '../auth/auth.service';
+import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CapturesService {
+
   private capturesArray: Capture[] = [
     {
       idCapture: 1,
@@ -76,8 +79,47 @@ export class CapturesService {
   ];
 
   constructor(
-    private storage: AngularFireStorage
-  ) {}
+    private storage: AngularFireStorage,
+    private authService: AuthService
+    ) {}
+
+  async takePhoto(){
+    const image: Photo = await Camera.getPhoto({
+      quality: 100,
+      allowEditing: false,
+      resultType:CameraResultType.Uri,
+      source: CameraSource.Camera,
+    });
+
+    const imageBlob = await this.dataURItoBlob(image);
+
+    const imageName = this.imageName() + '.jpeg';
+    const imageFile = new File([imageBlob], imageName, {type: 'image/jpeg'});
+
+    const urlPhoto = await this.storePhoto(imageFile);
+    console.log(urlPhoto);
+  }
+
+  storePhoto(image: File){
+    return new Promise((resolve, reject) => {
+      const pictureRef = this.storage.ref('captures/' + this.authService.getToken() + '/' + this.imageName());
+
+      pictureRef.put(image).then(
+        () => {
+          pictureRef.getDownloadURL().subscribe(
+            (url) => {
+              resolve(url);
+            }
+          );
+        }
+      ).catch(
+        error => {
+          reject(error);
+        }
+      );
+    });
+  }
+
 
   public getCaptures() {
     return this.capturesArray;
@@ -87,5 +129,21 @@ export class CapturesService {
     return this.capturesArray.filter(
       (capture) => capture.idCapture === +idCapture
     )[0];
+  }
+
+  private imageName(): number{
+    const newTime = Math.floor(Date.now() / 1000);
+    return Math.floor(Math.random() * 20) + newTime;
+  }
+
+  private dataURItoBlob(dataURI) {
+    const byteString = window.atob(dataURI);
+    const arrayBuffer = new ArrayBuffer(byteString.length);
+    const int8Array = new Uint8Array(arrayBuffer);
+    for (let i = 0; i < byteString.length; i++) {
+      int8Array[i] = byteString.charCodeAt(i);
+    }
+    const blob = new Blob([int8Array], { type: 'image/jpeg' });
+   return blob;
   }
 }

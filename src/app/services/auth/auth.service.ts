@@ -29,8 +29,12 @@ export class AuthService {
     }
   }
 
+  getToken(): string{
+    return sessionStorage.getItem('userToken');
+  }
+
   getUserLogged(): Observable<any>{
-    const id: string = sessionStorage.getItem('userToken');
+    const id: string = this.getToken();
     return this.angularFirestore.collection('users').doc(id).get();
 
   }
