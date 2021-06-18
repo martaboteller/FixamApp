@@ -30,6 +30,11 @@ const routes: Routes = [
     redirectTo: 'list',
     pathMatch: 'full',
   },
+  {
+    path: 'detail',
+    loadChildren: () =>
+      import('./detail/detail.module').then((m) => m.DetailPageModule),
+  },
 ];
 
 @NgModule({

@@ -66,5 +66,11 @@
         </ion-card>
       </ion-col>
     </ion-row>
+    <!--Fab button to capture photo-->
+    <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+      <ion-fab-button color="tertiary" (click)="addPhotoToGallery()">
+        <ion-icon name="camera-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
   </ion-content>
 </ion-app>

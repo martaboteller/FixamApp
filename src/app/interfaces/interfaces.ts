@@ -18,3 +18,8 @@ export interface User {
   surname: string;
   email: string;
 }
+
+export interface Photo {
+  filepath: string;
+  webviewPath: string;
+}
