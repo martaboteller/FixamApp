@@ -4,6 +4,7 @@ import { User } from 'src/app/interfaces/interfaces';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CapturesService } from 'src/app/services/captures/captures.service';
 
+import { ThemeColorsService } from 'src/app/services/themeColors/themeColors.service';
 
 @Component({
   selector: 'app-menu',
@@ -13,6 +14,7 @@ import { CapturesService } from 'src/app/services/captures/captures.service';
 export class MenuPage implements OnInit {
 
   userLogged: User;
+  darkValue: any;
   pages = [
     {
       title: 'First',
@@ -34,10 +36,11 @@ export class MenuPage implements OnInit {
   selectedPath = '';
 
   constructor(
-    private router: Router,
     private authService: AuthService,
-    private captureService: CapturesService
-    ) {
+    private captureService: CapturesService,
+    private router: Router,
+    private themeColorsService: ThemeColorsService
+  ) {
     this.router.events.subscribe((event: RouterEvent) => {
       if (event && event.url) {
         this.selectedPath = event.url;
@@ -46,7 +49,8 @@ export class MenuPage implements OnInit {
   }
 
   ngOnInit() {
-
+    this.darkValue = this.darkBookean;
+    //console.log(this.darkValue);
   }
 
   takePhoto(){
@@ -58,13 +62,12 @@ export class MenuPage implements OnInit {
     this.router.navigate(['welcome']);
   }
 
-  onToggleColorTheme(event) {
-    if (event.detail.checked) {
-      document.body.setAttribute('color-theme', 'dark');
-      console.log(event.detail.checked);
-    } else {
-      document.body.setAttribute('color-theme', 'light');
-      console.log(event.detail.checked);
-    }
+  get darkBookean() {
+    return this.themeColorsService.sharedDarkValue;
+  }
+
+  setTheme(ev) {
+    //console.log(ev);
+    this.themeColorsService.setAppTheme(ev.detail.checked);
   }
 }

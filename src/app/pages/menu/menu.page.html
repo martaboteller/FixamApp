@@ -38,7 +38,9 @@
           <ion-icon slot="start" name="moon"></ion-icon>
           <ion-label> Toggle Dark Theme </ion-label>
           <ion-toggle
-            (ionChange)="onToggleColorTheme($event)"
+            [(ngModel)]="darkValue"
+            [checked]="darkValue"
+            (ionChange)="setTheme($event)"
             slot="end"
           ></ion-toggle>
         </ion-item>

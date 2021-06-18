@@ -8,7 +8,7 @@ import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera
   providedIn: 'root',
 })
 export class CapturesService {
-
+  //List of captures of testing purposes
   private capturesArray: Capture[] = [
     {
       idCapture: 1,
@@ -29,7 +29,7 @@ export class CapturesService {
       date: '03-07-2021',
       author: 'user2',
       votes: 400,
-      public: true,
+      public: false,
       image: '',
     },
     {
@@ -51,7 +51,7 @@ export class CapturesService {
       date: '01-05-2021',
       author: 'user1',
       votes: 1300,
-      public: true,
+      public: false,
       image: '',
     },
     {

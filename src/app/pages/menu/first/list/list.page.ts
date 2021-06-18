@@ -9,7 +9,7 @@ import { CapturesService } from 'src/app/services/captures/captures.service';
   styleUrls: ['./list.page.scss'],
 })
 export class ListPage implements OnInit {
-  //Declaration of variables
+  //Variables
   public listOfCaptures: Capture[];
 
   constructor(
@@ -21,7 +21,7 @@ export class ListPage implements OnInit {
     this.loadData();
   }
 
-  //Get data from the service
+  //Get data Captures service
   loadData() {
     this.listOfCaptures = this.captureService.getCaptures();
   }

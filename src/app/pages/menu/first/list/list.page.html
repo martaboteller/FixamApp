@@ -1,6 +1,6 @@
 <ion-app>
   <ion-header>
-    <ion-toolbar color="secondary">
+    <ion-toolbar color="tertiary">
       <ion-title>List Page</ion-title>
       <ion-buttons slot="start">
         <ion-menu-button autoHide="false"></ion-menu-button>
@@ -30,10 +30,38 @@
         color="primary"
       >
         <ion-card class="favCard">
-          <img src="assets/img/basic.png" />
+          <ion-img class="center" src="assets/img/basic.png"></ion-img>
+          <!--overlay in image-->
+          <div class="myOverlay" style="display: flex">
+            <!--show if public or not-->
+            <div class="card-public">
+              <div *ngIf="c.public; else elseBlock">
+                <ion-icon name="eye-outline"></ion-icon>
+              </div>
+              <ng-template #elseBlock
+                ><ion-icon name="eye-off-outline"></ion-icon
+              ></ng-template>
+            </div>
+            <!--show author-->
+            <div class="card-author">{{c.author}}</div>
+          </div>
+          <!--end overlay-->
+          <!--Title-->
+          <ion-card-title> {{c.name}} </ion-card-title>
+          <!--Content-->
           <ion-card-content>
-            <ion-card-title> {{c.name}} </ion-card-title>
-            <p>{{c.description}}</p>
+            <ion-item lines="none"
+              ><ion-card-subtitle
+                >{{c.description}}</ion-card-subtitle
+              ></ion-item
+            >
+            <ion-item lines="none">
+              <ion-progress-bar
+                color="medium"
+                value="0.5"
+                style="width: 50%"
+              ></ion-progress-bar
+            ></ion-item>
           </ion-card-content>
         </ion-card>
       </ion-col>
