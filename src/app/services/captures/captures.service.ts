@@ -8,6 +8,7 @@ import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera
   providedIn: 'root',
 })
 export class CapturesService {
+
   //List of captures of testing purposes
   private capturesArray: Capture[] = [
     {
@@ -83,44 +84,67 @@ export class CapturesService {
     private authService: AuthService
     ) {}
 
+
+//Take a photo with the camera
   async takePhoto(){
     const image: Photo = await Camera.getPhoto({
       quality: 100,
       allowEditing: false,
-      resultType:CameraResultType.Uri,
+      resultType:CameraResultType.Base64,
       source: CameraSource.Camera,
     });
 
-    const imageBlob = await this.dataURItoBlob(image);
-
+    // console.log('Image '+ image.base64String);
+    const imageBlob = await this.database64ToBlob(image.base64String);
     const imageName = this.imageName() + '.jpeg';
     const imageFile = new File([imageBlob], imageName, {type: 'image/jpeg'});
-
-    const urlPhoto = await this.storePhoto(imageFile);
-    console.log(urlPhoto);
+    const urlPhoto = await this.storeImage(imageFile);
+    //console.log(urlPhoto);
   }
 
-  storePhoto(image: File){
-    return new Promise((resolve, reject) => {
-      const pictureRef = this.storage.ref('captures/' + this.authService.getToken() + '/' + this.imageName());
+  //Create a name for the image
+  private imageName(): number{
+    const newTime = Math.floor(Date.now() / 1000);
+    return Math.floor(Math.random() * 20) + newTime;
+  }
 
-      pictureRef.put(image).then(
-        () => {
-          pictureRef.getDownloadURL().subscribe(
-            (url) => {
-              resolve(url);
-            }
-          );
-        }
-      ).catch(
-        error => {
-          reject(error);
-        }
-      );
+  //Transfrom image from database64 to blob
+  private database64ToBlob(database64) {
+    const byteString = atob(database64);
+    const arrayBuffer = new ArrayBuffer(byteString.length);
+    const int8Array = new Uint8Array(arrayBuffer);
+    for (let i = 0; i < byteString.length; i++) {
+      int8Array[i] = byteString.charCodeAt(i);
+    }
+    console.log("Database64 " + database64);
+    const blob = new Blob([int8Array], { type: 'image/jpeg' });
+   return blob;
+   
+  }
+
+  //Store the photo at Firebase Storage
+   async storeImage(imageData: any) {
+    try {
+        const imageName = this.imageName();
+        return new Promise((resolve, reject) => {
+        const pictureRef = this.storage.ref('captures/' + this.authService.getToken() + '/' + this.imageName());
+        pictureRef
+        .put(imageData)
+        .then(function () {
+        pictureRef.getDownloadURL().subscribe((url: any) => {
+        resolve(url);
+        });
+    })
+    .catch((error) => {
+        reject(error);
     });
-  }
+    });
+    } catch (e) {}
+    }
+   
+    
 
-
+  /*---This methods will be removed soon-----*/  
   public getCaptures() {
     return this.capturesArray;
   }
@@ -130,20 +154,5 @@ export class CapturesService {
       (capture) => capture.idCapture === +idCapture
     )[0];
   }
-
-  private imageName(): number{
-    const newTime = Math.floor(Date.now() / 1000);
-    return Math.floor(Math.random() * 20) + newTime;
-  }
-
-  private dataURItoBlob(dataURI) {
-    const byteString = window.atob(dataURI);
-    const arrayBuffer = new ArrayBuffer(byteString.length);
-    const int8Array = new Uint8Array(arrayBuffer);
-    for (let i = 0; i < byteString.length; i++) {
-      int8Array[i] = byteString.charCodeAt(i);
-    }
-    const blob = new Blob([int8Array], { type: 'image/jpeg' });
-   return blob;
-  }
+ 
 }
