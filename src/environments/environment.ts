@@ -10,8 +10,9 @@ export const environment = {
     projectId: 'fixam-b9324',
     storageBucket: 'fixam-b9324.appspot.com',
     messagingSenderId: '636720841226',
-    appId: '1:636720841226:web:cb5a6e8ca098e0f61715f3'
+    appId: '1:636720841226:web:cb5a6e8ca098e0f61715f3',
   },
+  googleMapsKey: 'AIzaSyD6TUSWV_mkQsHTpHX26IUn-VSty9HA4yg',
 };
 
 /*

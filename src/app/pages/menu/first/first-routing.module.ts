@@ -31,7 +31,7 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'detail',
+    path: 'detail/:url',
     loadChildren: () =>
       import('./detail/detail.module').then((m) => m.DetailPageModule),
   },

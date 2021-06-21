@@ -12,7 +12,6 @@ import { ThemeColorsService } from 'src/app/services/themeColors/themeColors.ser
   styleUrls: ['./menu.page.scss'],
 })
 export class MenuPage implements OnInit {
-
   userLogged: User;
   darkValue: any;
   pages = [
@@ -53,11 +52,20 @@ export class MenuPage implements OnInit {
     //console.log(this.darkValue);
   }
 
-  takePhoto(){
-    this.captureService.takePhoto();
+  async takePhoto() {
+    this.captureService
+      .takePhoto()
+      .then((url) => {
+        console.log('Url ' + url);
+        //Go to detail
+        this.router.navigate(['/menu/first/detail', url]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
-  logout(){
+  logout() {
     this.authService.logout();
     this.router.navigate(['welcome']);
   }

@@ -2,13 +2,17 @@ import { Injectable } from '@angular/core';
 import { Capture } from 'src/app/interfaces/interfaces';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AuthService } from '../auth/auth.service';
-import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
+import {
+  Camera,
+  CameraResultType,
+  CameraSource,
+  Photo,
+} from '@capacitor/camera';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CapturesService {
-
   //List of captures of testing purposes
   private capturesArray: Capture[] = [
     {
@@ -82,28 +86,28 @@ export class CapturesService {
   constructor(
     private storage: AngularFireStorage,
     private authService: AuthService
-    ) {}
+  ) {}
 
-
-//Take a photo with the camera
-  async takePhoto(){
+  //Take a photo with the camera
+  async takePhoto(): Promise<any> {
     const image: Photo = await Camera.getPhoto({
       quality: 100,
       allowEditing: false,
-      resultType:CameraResultType.Base64,
+      resultType: CameraResultType.Base64,
       source: CameraSource.Camera,
     });
 
     // console.log('Image '+ image.base64String);
     const imageBlob = await this.database64ToBlob(image.base64String);
     const imageName = this.imageName() + '.jpeg';
-    const imageFile = new File([imageBlob], imageName, {type: 'image/jpeg'});
+    const imageFile = new File([imageBlob], imageName, { type: 'image/jpeg' });
     const urlPhoto = await this.storeImage(imageFile);
+    return urlPhoto;
     //console.log(urlPhoto);
   }
 
   //Create a name for the image
-  private imageName(): number{
+  private imageName(): number {
     const newTime = Math.floor(Date.now() / 1000);
     return Math.floor(Math.random() * 20) + newTime;
   }
@@ -116,35 +120,34 @@ export class CapturesService {
     for (let i = 0; i < byteString.length; i++) {
       int8Array[i] = byteString.charCodeAt(i);
     }
-    console.log("Database64 " + database64);
+    console.log('Database64 ' + database64);
     const blob = new Blob([int8Array], { type: 'image/jpeg' });
-   return blob;
-   
+    return blob;
   }
 
   //Store the photo at Firebase Storage
-   async storeImage(imageData: any) {
+  async storeImage(imageData: any) {
     try {
-        const imageName = this.imageName();
-        return new Promise((resolve, reject) => {
-        const pictureRef = this.storage.ref('captures/' + this.authService.getToken() + '/' + this.imageName());
+      const imageName = this.imageName();
+      return new Promise((resolve, reject) => {
+        const pictureRef = this.storage.ref(
+          'captures/' + this.authService.getToken() + '/' + this.imageName()
+        );
         pictureRef
-        .put(imageData)
-        .then(function () {
-        pictureRef.getDownloadURL().subscribe((url: any) => {
-        resolve(url);
-        });
-    })
-    .catch((error) => {
-        reject(error);
-    });
-    });
+          .put(imageData)
+          .then(function () {
+            pictureRef.getDownloadURL().subscribe((url: any) => {
+              resolve(url);
+            });
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
     } catch (e) {}
-    }
-   
-    
+  }
 
-  /*---This methods will be removed soon-----*/  
+  /*---This methods will be removed soon-----*/
   public getCaptures() {
     return this.capturesArray;
   }
@@ -154,5 +157,4 @@ export class CapturesService {
       (capture) => capture.idCapture === +idCapture
     )[0];
   }
- 
 }
