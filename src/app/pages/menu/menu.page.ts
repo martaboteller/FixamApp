@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterEvent } from '@angular/router';
+import { ActivatedRoute, Router, RouterEvent } from '@angular/router';
 import { User } from 'src/app/interfaces/interfaces';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CapturesService } from 'src/app/services/captures/captures.service';
@@ -14,6 +14,7 @@ import { ThemeColorsService } from 'src/app/services/themeColors/themeColors.ser
 export class MenuPage implements OnInit {
   userLogged: User;
   darkValue: any;
+  photoReturn = [{ url: '', imageName: '' }];
   pages = [
     {
       title: 'First',
@@ -55,10 +56,11 @@ export class MenuPage implements OnInit {
   async takePhoto() {
     this.captureService
       .takePhoto()
-      .then((url) => {
-        console.log('Url ' + url);
-        //Go to detail
-        this.router.navigate(['/menu/first/detail', url]);
+      .then((photoReturn) => {
+        //console.log(photoReturn['imageName']);
+        //console.log(photoReturn['url']);
+
+        this.router.navigate(['/menu/first/detail', photoReturn['url']]);
       })
       .catch((err) => {
         console.log(err);

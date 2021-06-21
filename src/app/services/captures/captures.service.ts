@@ -14,6 +14,8 @@ import {
 })
 export class CapturesService {
   //List of captures of testing purposes
+
+  private photoReturn = { url: '', imageName: '' };
   private capturesArray: Capture[] = [
     {
       idCapture: 1,
@@ -102,8 +104,12 @@ export class CapturesService {
     const imageName = this.imageName() + '.jpeg';
     const imageFile = new File([imageBlob], imageName, { type: 'image/jpeg' });
     const urlPhoto = await this.storeImage(imageFile);
-    return urlPhoto;
-    //console.log(urlPhoto);
+
+    //Return url and image name
+
+    this.photoReturn.url = urlPhoto.toString();
+    this.photoReturn.imageName = imageName;
+    return this.photoReturn;
   }
 
   //Create a name for the image
