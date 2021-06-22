@@ -29,7 +29,7 @@
         *ngFor="let c of listOfCaptures"
         color="primary"
       >
-        <ion-card class="favCard" (click)=goToDetail(c.imageUrl,c.name)>
+        <ion-card class="favCard" (click)="goToDetail(c.imageUrl,c.idCapture)">
           <ion-img
             class="center"
             src="assets/img/basic.png"

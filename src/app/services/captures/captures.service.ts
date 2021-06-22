@@ -21,7 +21,7 @@ export class CapturesService {
       idCapture: 1,
       name: 'Capture 1',
       description: 'This is the description of capture 1',
-      coordinates: '',
+      coordinates: '41.934497854664265, 2.250535226388106',
       date: '01-05-2021',
       author: 'user1',
       votes: 1300,
