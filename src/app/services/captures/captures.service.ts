@@ -21,67 +21,84 @@ export class CapturesService {
       idCapture: 1,
       name: 'Capture 1',
       description: 'This is the description of capture 1',
-      location: '',
+      coordinates: '',
       date: '01-05-2021',
       author: 'user1',
       votes: 1300,
       public: true,
-      image: '',
+      imageUrl:
+        'https://firebasestorage.googleapis.com/v0/b/fixam-b9324.appspot.com/o/captures%2FdYdcu44ndPeIVsX21zRDbSPnNd32%2Fbasic.png?alt=media&token=85677726-aea7-4aa5-9e63-169944f29a0e',
+      imageName: '',
     },
     {
       idCapture: 2,
       name: 'Capture 2',
       description: 'This is the description of capture 2',
-      location: '',
+      coordinates: '',
       date: '03-07-2021',
       author: 'user2',
       votes: 400,
       public: false,
-      image: '',
+      imageName: '',
+
+      imageUrl:
+        'https://firebasestorage.googleapis.com/v0/b/fixam-b9324.appspot.com/o/captures%2FdYdcu44ndPeIVsX21zRDbSPnNd32%2Fbasic.png?alt=media&token=85677726-aea7-4aa5-9e63-169944f29a0e',
     },
     {
       idCapture: 3,
       name: 'Capture 3',
       description: 'This is the description of capture 3',
-      location: '',
+      coordinates: '',
       date: '12-04-2020',
       author: 'user3',
       votes: 750,
       public: true,
-      image: '',
+      imageName: '',
+
+      imageUrl:
+        'https://firebasestorage.googleapis.com/v0/b/fixam-b9324.appspot.com/o/captures%2FdYdcu44ndPeIVsX21zRDbSPnNd32%2Fbasic.png?alt=media&token=85677726-aea7-4aa5-9e63-169944f29a0e',
     },
     {
       idCapture: 4,
       name: 'Capture 4',
       description: 'This is the description of capture 4',
-      location: '',
+      coordinates: '',
       date: '01-05-2021',
       author: 'user1',
       votes: 1300,
       public: false,
-      image: '',
+      imageName: '',
+
+      imageUrl:
+        'https://firebasestorage.googleapis.com/v0/b/fixam-b9324.appspot.com/o/captures%2FdYdcu44ndPeIVsX21zRDbSPnNd32%2Fbasic.png?alt=media&token=85677726-aea7-4aa5-9e63-169944f29a0e',
     },
     {
       idCapture: 5,
       name: 'Capture 5',
       description: 'This is the description of capture 5',
-      location: '',
+      coordinates: '',
       date: '03-07-2021',
       author: 'user2',
       votes: 400,
       public: true,
-      image: '',
+      imageName: '',
+
+      imageUrl:
+        'https://firebasestorage.googleapis.com/v0/b/fixam-b9324.appspot.com/o/captures%2FdYdcu44ndPeIVsX21zRDbSPnNd32%2Fbasic.png?alt=media&token=85677726-aea7-4aa5-9e63-169944f29a0e',
     },
     {
       idCapture: 6,
       name: 'Capture 6',
       description: 'This is the description of capture 6',
-      location: '',
+      coordinates: '',
       date: '12-04-2020',
       author: 'user3',
       votes: 750,
       public: true,
-      image: '',
+      imageName: '',
+
+      imageUrl:
+        'https://firebasestorage.googleapis.com/v0/b/fixam-b9324.appspot.com/o/captures%2FdYdcu44ndPeIVsX21zRDbSPnNd32%2Fbasic.png?alt=media&token=85677726-aea7-4aa5-9e63-169944f29a0e',
     },
   ];
 

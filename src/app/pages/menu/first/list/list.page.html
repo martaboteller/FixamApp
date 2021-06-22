@@ -29,7 +29,7 @@
         *ngFor="let c of listOfCaptures"
         color="primary"
       >
-        <ion-card class="favCard">
+        <ion-card class="favCard" [click]="clickCard(c.imageUrl)">
           <ion-img
             class="center"
             src="assets/img/basic.png"

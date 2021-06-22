@@ -11,6 +11,7 @@ import { CapturesService } from 'src/app/services/captures/captures.service';
 export class ListPage implements OnInit {
   //Variables
   public listOfCaptures: Capture[];
+  public urlBasic: String;
 
   constructor(
     private router: Router,
@@ -24,5 +25,10 @@ export class ListPage implements OnInit {
   //Get data Captures service
   loadData() {
     this.listOfCaptures = this.captureService.getCaptures();
+  }
+
+  //Go to detail if card pressed
+  clickCard($event, urlImage) {
+    this.router.navigate(['../../menu/first/detail/', urlImage]);
   }
 }

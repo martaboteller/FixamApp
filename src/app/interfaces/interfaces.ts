@@ -1,13 +1,16 @@
+import { Timestamp } from 'rxjs';
+
 export interface Capture {
   idCapture: number;
+  imageName: string;
+  imageUrl: string;
   name: string;
   description: string;
-  location: string;
+  coordinates: string;
   date: string;
   author: string;
   votes: number;
   public: boolean;
-  image: string;
 }
 
 export interface User {

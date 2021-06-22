@@ -23,5 +23,7 @@ export class DetailPage implements OnInit {
   loadDetailCapture() {
     //Show photo
     this.photoUrl = this.route.snapshot.paramMap.get('url');
+
+    console.log('this is the url ' + this.photoUrl);
   }
 }
