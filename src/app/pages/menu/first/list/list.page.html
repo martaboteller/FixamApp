@@ -29,12 +29,10 @@
         *ngFor="let c of listOfCaptures"
         color="primary"
       >
-        <ion-card class="favCard" [click]="clickCard(c.imageUrl)">
+        <ion-card class="favCard" (click)=goToDetail(c.imageUrl,c.name)>
           <ion-img
             class="center"
             src="assets/img/basic.png"
-            href=""
-            routerLink="/menu/first"
             routerDirection="root"
           ></ion-img>
           <!--overlay in image-->

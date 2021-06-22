@@ -28,7 +28,8 @@ export class ListPage implements OnInit {
   }
 
   //Go to detail if card pressed
-  clickCard($event, urlImage) {
-    this.router.navigate(['../../menu/first/detail/', urlImage]);
+  goToDetail(imageUrl: string, idCapture: number) {
+    console.log('I amb in list page, this is the url ' + imageUrl);
+    this.router.navigate(['../../menu/first/detail/', imageUrl, idCapture]);
   }
 }

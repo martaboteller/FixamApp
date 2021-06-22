@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { Storage } from '@ionic/storage';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +26,7 @@ import { Storage } from '@ionic/storage';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    AngularFireStorageModule,
+    AngularFireStorageModule
   ],
   providers: [
     Camera,
