@@ -29,6 +29,11 @@ export class DetailPage implements OnInit {
   loadDetailCapture() {
     this.photoUrl = this.route.snapshot.paramMap.get('url');
     this.idCapture = Number(this.route.snapshot.paramMap.get('idCapture'));
+
+    console.log('I am in detail, this is url '+ this.photoUrl);
+    console.log('I am in detail, this is idCapture '+ this.idCapture);
+
+
     this.activeCapture = this.captureService.getCapturesById(this.idCapture);
   }
 

@@ -72,25 +72,13 @@ export class AuthService {
     });
   }
 
-  /*saveNewCapture(capture: Capture): Promise<any> {
-    return new Promise((resolve, reject) => {response =>{
-      this.angularFirestore.collection('captures').doc(capture.imageName).set({
-        author: capture.author,
-        coordinates: capture.coordinates,
-        date: capture.date,
-        description: capture.description,
-        imageName: capture.imageName,
-        name: capture.name,
-        public: capture.public,
-        votes: capture.votes,
-      });
-      resolve(response);
-      }}.
-      .catch ((error) => {
-        reject (error);
-      });
-  };*/
-
+  saveNewCapture(capture: Capture): Promise<any> {
+    return new Promise <any>((resolve, reject) => {
+      this.angularFirestore.collection('captures').add(capture).then(
+        res => {},err => reject(err));
+    });
+  }
+  
   logout() {
     sessionStorage.removeItem('userToken');
     this.fireAuth.signOut();

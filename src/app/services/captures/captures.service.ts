@@ -126,6 +126,7 @@ export class CapturesService {
 
     this.photoReturn.url = urlPhoto.toString();
     this.photoReturn.imageName = imageName;
+    
     return this.photoReturn;
   }
 

@@ -12,6 +12,11 @@ import { ThemeColorsService } from 'src/app/services/themeColors/themeColors.ser
   styleUrls: ['./menu.page.scss'],
 })
 export class MenuPage implements OnInit {
+  
+  //Variables 
+  idCapture: number;
+  imageName: string;
+  imageUrl: string;
   userLogged: User;
   darkValue: any;
   photoReturn = [{ url: '', imageName: '' }];
@@ -57,10 +62,17 @@ export class MenuPage implements OnInit {
     this.captureService
       .takePhoto()
       .then((photoReturn) => {
-        //console.log(photoReturn['imageName']);
-        //console.log(photoReturn['url']);
+        console.log('I am in menu ' + photoReturn['imageName']);
+        console.log('I am in menu ' + photoReturn['url']);
+        this.imageUrl = photoReturn['url'];
+        this.imageName = photoReturn['imageName']
+        
+        this.idCapture = Number(this.imageName.substring(0,10));
+        console.log('String cutt ' +this.idCapture);
 
-        this.router.navigate(['/menu/first/detail', photoReturn['url']]);
+        this.router.navigate(['../../menu/first/detail/', this.imageUrl, this.idCapture]);
+
+       
       })
       .catch((err) => {
         console.log(err);
