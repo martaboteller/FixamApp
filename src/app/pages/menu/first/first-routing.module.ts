@@ -19,6 +19,11 @@ const routes: Routes = [
           import('./map/map.module').then((m) => m.MapPageModule),
       },
       {
+        path: 'map/:idCapture',
+        loadChildren: () =>
+          import('./map/map.module').then((m) => m.MapPageModule),
+      },
+      {
         path: '',
         redirectTo: 'list',
         pathMatch: 'full',

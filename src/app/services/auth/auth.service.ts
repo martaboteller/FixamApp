@@ -72,13 +72,6 @@ export class AuthService {
     });
   }
 
-  saveNewCapture(capture: Capture): Promise<any> {
-    return new Promise <any>((resolve, reject) => {
-      this.angularFirestore.collection('captures').add(capture).then(
-        res => {},err => reject(err));
-    });
-  }
-  
   logout() {
     sessionStorage.removeItem('userToken');
     this.fireAuth.signOut();

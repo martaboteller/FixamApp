@@ -1,6 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Geolocation } from '@capacitor/geolocation';
-import { ToastController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
+import { MapMarker } from 'src/app/interfaces/interfaces';
+import { CapturesService } from 'src/app/services/captures/captures.service';
+import { GeolocationService } from 'src/app/services/geolocation/geolocation.service';
 
 declare const google;
 
@@ -14,51 +16,67 @@ export class MapPage {
   @ViewChild('map', { static: false }) mapElement: ElementRef;
   map: any;
 
-  constructor(public toastController: ToastController) {}
+  //Variables
+  public listOfCoordinates: MapMarker[] = [];
+  public positionToDisplay: MapMarker;
+
+  constructor(
+    private captureService: CapturesService,
+    private geolocationService: GeolocationService,
+    private route: ActivatedRoute
+  ) {}
 
   //Ionic loads map with it's functions
-  ionViewDidEnter() {
-    this.getLocation();
+  async ionViewDidEnter() {
+    this.listOfCoordinates = this.captureService.getAllLocations();
+    this.chooseMapToDisplay();
+    this.renderMarkers();
   }
 
-  async getLocation() {
-    const coordinates = await Geolocation.getCurrentPosition();
-    this.presentToast(
-      'Latitud ' +
-        coordinates.coords.latitude.toString() +
-        ' Longitud ' +
-        coordinates.coords.longitude.toString()
-    );
-    this.loadMap(coordinates);
+  async chooseMapToDisplay() {
+    //Coming from  map tab
+    var mapMarker: MapMarker;
+    if (this.route.snapshot.paramMap.get('idCapture') == null) {
+      mapMarker = await this.geolocationService.getLocation();
+    } else {
+      //Coming from detail page
+      const idCapture = Number(this.route.snapshot.paramMap.get('idCapture'));
+      mapMarker = this.captureService.filterLocationById(idCapture);
+    }
+    this.displayGoogleMap(mapMarker);
   }
 
-  async presentToast(msg: string) {
-    const toast = await this.toastController.create({
-      message: msg,
-      duration: 2000,
-    });
-    toast.present();
-  }
-
-  loadMap(coordinates) {
+  async displayGoogleMap(mapMarker: MapMarker) {
     const latLng = new google.maps.LatLng(
-      coordinates.coords.latitude,
-      coordinates.coords.longitude
+      mapMarker.position.lat,
+      mapMarker.position.lng
     );
     const mapOptions = {
       center: latLng,
       zoom: 15,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
     };
+
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-    this.addMarker(this.map);
+
+    google.maps.event.addListenerOnce(this.map, 'idle', () => {
+      this.renderMarkers();
+      this.mapElement.nativeElement.classList.add('show-map');
+    });
   }
 
-  addMarker(map) {
-    const marker = new google.maps.Marker({
-      map,
-      animation: google.maps.Animation.DROP,
-      position: map.getCenter(),
+  renderMarkers() {
+    this.listOfCoordinates.forEach((marker) => {
+      this.addMarker(marker);
+    });
+  }
+
+  addMarker(marker: MapMarker) {
+    return new google.maps.Marker({
+      position: marker.position,
+      map: this.map,
+      label: marker.votes.toString(),
+      icon: '/assets/icon/my_marker.png',
     });
   }
 }

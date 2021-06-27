@@ -10,14 +10,13 @@ import { AuthService } from 'src/app/services/auth/auth.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
   loginForm: FormGroup;
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private toast: ToastController
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.buildForm();
@@ -26,7 +25,7 @@ export class LoginPage implements OnInit {
   async presentToast() {
     const toast = await this.toast.create({
       message: 'Login incorrecto',
-      duration: 4000
+      duration: 4000,
     });
     toast.present();
   }
@@ -34,30 +33,40 @@ export class LoginPage implements OnInit {
   buildForm(): void {
     this.loginForm = new FormGroup({
       password: new FormControl(null, Validators.required),
-      email: new FormControl(null, [
-        Validators.required,
-        Validators.email
-      ]),
+      email: new FormControl(null, [Validators.required, Validators.email]),
     });
   }
 
-  login(){
-    if(this.loginForm.valid){
+  login() {
+    if (this.loginForm.valid) {
       const email = this.loginForm.get('email').value;
       const password = this.loginForm.get('password').value;
 
-      this.authService.login(email, password).then(
-        response => {
+      this.authService
+        .login(email, password)
+        .then((response) => {
           this.authService.setUserLogged(response);
           this.router.navigate(['../../menu/first/list']);
-        }
-      ).catch(
-        error => {
+        })
+        .catch((error) => {
           this.presentToast();
           console.log(error);
-        }
-      );
+        });
     }
   }
 
+  testingAccess() {
+    const emailT = 'marta.boteller@gmail.com';
+    const passwordT = 'marta123';
+    this.authService
+      .login(emailT, passwordT)
+      .then((response) => {
+        this.authService.setUserLogged(response);
+        this.router.navigate(['../../menu/first/list']);
+      })
+      .catch((error) => {
+        this.presentToast();
+        console.log(error);
+      });
+  }
 }

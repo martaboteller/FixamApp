@@ -1,6 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Capture } from 'src/app/interfaces/interfaces';
+import { Injectable, OnInit } from '@angular/core';
+import { Capture, MapMarker } from 'src/app/interfaces/interfaces';
 import { AngularFireStorage } from '@angular/fire/storage';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+} from '@angular/fire/firestore';
 import { AuthService } from '../auth/auth.service';
 import {
   Camera,
@@ -8,134 +12,146 @@ import {
   CameraSource,
   Photo,
 } from '@capacitor/camera';
+import { map } from 'rxjs/operators';
+import { GeolocationService } from '../geolocation/geolocation.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CapturesService {
-  //List of captures of testing purposes
-
-  private photoReturn = { url: '', imageName: '' };
-  private capturesArray: Capture[] = [
-    {
-      idCapture: 1,
-      name: 'Capture 1',
-      description: 'This is the description of capture 1',
-      coordinates: '41.934497854664265, 2.250535226388106',
-      date: '01-05-2021',
-      author: 'user1',
-      votes: 1300,
-      public: true,
-      imageUrl:
-        'https://firebasestorage.googleapis.com/v0/b/fixam-b9324.appspot.com/o/captures%2FdYdcu44ndPeIVsX21zRDbSPnNd32%2Fbasic.png?alt=media&token=85677726-aea7-4aa5-9e63-169944f29a0e',
-      imageName: '',
-    },
-    {
-      idCapture: 2,
-      name: 'Capture 2',
-      description: 'This is the description of capture 2',
-      coordinates: '',
-      date: '03-07-2021',
-      author: 'user2',
-      votes: 400,
-      public: false,
-      imageName: '',
-
-      imageUrl:
-        'https://firebasestorage.googleapis.com/v0/b/fixam-b9324.appspot.com/o/captures%2FdYdcu44ndPeIVsX21zRDbSPnNd32%2Fbasic.png?alt=media&token=85677726-aea7-4aa5-9e63-169944f29a0e',
-    },
-    {
-      idCapture: 3,
-      name: 'Capture 3',
-      description: 'This is the description of capture 3',
-      coordinates: '',
-      date: '12-04-2020',
-      author: 'user3',
-      votes: 750,
-      public: true,
-      imageName: '',
-
-      imageUrl:
-        'https://firebasestorage.googleapis.com/v0/b/fixam-b9324.appspot.com/o/captures%2FdYdcu44ndPeIVsX21zRDbSPnNd32%2Fbasic.png?alt=media&token=85677726-aea7-4aa5-9e63-169944f29a0e',
-    },
-    {
-      idCapture: 4,
-      name: 'Capture 4',
-      description: 'This is the description of capture 4',
-      coordinates: '',
-      date: '01-05-2021',
-      author: 'user1',
-      votes: 1300,
-      public: false,
-      imageName: '',
-
-      imageUrl:
-        'https://firebasestorage.googleapis.com/v0/b/fixam-b9324.appspot.com/o/captures%2FdYdcu44ndPeIVsX21zRDbSPnNd32%2Fbasic.png?alt=media&token=85677726-aea7-4aa5-9e63-169944f29a0e',
-    },
-    {
-      idCapture: 5,
-      name: 'Capture 5',
-      description: 'This is the description of capture 5',
-      coordinates: '',
-      date: '03-07-2021',
-      author: 'user2',
-      votes: 400,
-      public: true,
-      imageName: '',
-
-      imageUrl:
-        'https://firebasestorage.googleapis.com/v0/b/fixam-b9324.appspot.com/o/captures%2FdYdcu44ndPeIVsX21zRDbSPnNd32%2Fbasic.png?alt=media&token=85677726-aea7-4aa5-9e63-169944f29a0e',
-    },
-    {
-      idCapture: 6,
-      name: 'Capture 6',
-      description: 'This is the description of capture 6',
-      coordinates: '',
-      date: '12-04-2020',
-      author: 'user3',
-      votes: 750,
-      public: true,
-      imageName: '',
-
-      imageUrl:
-        'https://firebasestorage.googleapis.com/v0/b/fixam-b9324.appspot.com/o/captures%2FdYdcu44ndPeIVsX21zRDbSPnNd32%2Fbasic.png?alt=media&token=85677726-aea7-4aa5-9e63-169944f29a0e',
-    },
-  ];
+export class CapturesService implements OnInit {
+  //Variables
+  savedCapture: Capture;
+  isNewEntry: boolean = false;
+  capturesFromFirebase: Capture[];
+  capturesRef: AngularFirestoreCollection<Capture>;
+  listOfCoordinates: MapMarker[] = [];
 
   constructor(
     private storage: AngularFireStorage,
-    private authService: AuthService
+    private authService: AuthService,
+    private angularFirestore: AngularFirestore,
+    private geolocationService: GeolocationService
   ) {}
 
-  //Take a photo with the camera
+  ngOnInit() {
+    this.getCapturesFromFirebase();
+  }
+
+  //Get all captures from Firebase
+  getCapturesFromFirebase(): AngularFirestoreCollection<Capture> {
+    this.capturesRef = this.angularFirestore.collection('captures');
+    this.saveCapturesToArray();
+    return this.capturesRef;
+  }
+
+  saveCapturesToArray(): void {
+    this.capturesRef
+      .snapshotChanges()
+      .pipe(
+        map((changes) =>
+          changes.map((c) => ({
+            id: c.payload.doc.id,
+            ...c.payload.doc.data(),
+          }))
+        )
+      )
+      .subscribe((data) => {
+        this.capturesFromFirebase = data;
+      });
+  }
+
+  //Get all locations
+  getAllLocations(): MapMarker[] {
+    for (let i = 0; i < this.capturesFromFirebase.length; i++) {
+      this.listOfCoordinates.push({
+        position: {
+          lat: Number(this.capturesFromFirebase[i].latitude),
+          lng: Number(this.capturesFromFirebase[i].longitude),
+        },
+        votes: this.capturesFromFirebase[i].votes,
+        idCapture: this.capturesFromFirebase[i].idCapture,
+      });
+    }
+    return this.listOfCoordinates;
+  }
+
+  //Select one capture from array of captures
+  filterCaptureById(idCapture: number): Capture {
+    return this.capturesFromFirebase.filter(
+      (capture) => capture.idCapture === +idCapture
+    )[0];
+  }
+
+  //Select one location from array of locations
+  filterLocationById(idCapture: number): MapMarker {
+    return this.listOfCoordinates.filter(
+      (mapMarker) => mapMarker.idCapture === +idCapture
+    )[0];
+  }
+
+  //Save a new capture document to Firebase
+  updateCapture(capture: Capture): any {
+    return this.capturesRef
+      .doc(capture.idCapture.toString())
+      .set({ ...capture });
+  }
+
+  //Update capture from Firebase
+  /*updateCapture(idCapture: string, data: any): Promise<void> {
+    return this.capturesRef.doc(idCapture).update(data);
+  }*/
+
+  //Delete a capture from Firebase
+  deleteCapture(idCapture: string): Promise<void> {
+    return this.capturesRef.doc(idCapture).delete();
+  }
+
+  //Take a photo with the camera and save it at Firebase
   async takePhoto(): Promise<any> {
     const image: Photo = await Camera.getPhoto({
       quality: 100,
-      allowEditing: false,
+      allowEditing: true,
       resultType: CameraResultType.Base64,
       source: CameraSource.Camera,
+      saveToGallery: false,
     });
 
-    // console.log('Image '+ image.base64String);
+    //Save photo at firestorage and recive imageUrl
     const imageBlob = await this.database64ToBlob(image.base64String);
     const imageName = this.imageName() + '.jpeg';
     const imageFile = new File([imageBlob], imageName, { type: 'image/jpeg' });
     const urlPhoto = await this.storeImage(imageFile);
 
-    //Return url and image name
+    //Ask for position
+    const coordinatesPhoto = this.geolocationService.getLocation();
+    const lat = (await coordinatesPhoto).position.lat.toString();
+    const long = (await coordinatesPhoto).position.lng.toString();
 
-    this.photoReturn.url = urlPhoto.toString();
-    this.photoReturn.imageName = imageName;
-    
-    return this.photoReturn;
+    //Create a new object capture
+    this.isNewEntry = true;
+    const newCapture: Capture = {
+      imageUrl: urlPhoto.toString(),
+      idCapture: Number(this.imageName()),
+      latitude: lat,
+      longitude: long,
+      date: String(new Date()),
+      description: '',
+      name: '',
+      publicState: true,
+      uid: this.authService.getToken(),
+      votes: 0,
+      dislikeChecked: false,
+    };
+    this.savedCapture = newCapture;
+    return newCapture;
   }
 
+  /*-----------------Functions for camera image---------------*/
   //Create a name for the image
   private imageName(): number {
     const newTime = Math.floor(Date.now() / 1000);
     return Math.floor(Math.random() * 20) + newTime;
   }
-
   //Transfrom image from database64 to blob
   private database64ToBlob(database64) {
     const byteString = atob(database64);
@@ -144,18 +160,20 @@ export class CapturesService {
     for (let i = 0; i < byteString.length; i++) {
       int8Array[i] = byteString.charCodeAt(i);
     }
-    console.log('Database64 ' + database64);
     const blob = new Blob([int8Array], { type: 'image/jpeg' });
     return blob;
   }
-
-  //Store the photo at Firebase Storage
+  //Store the photo
   async storeImage(imageData: any) {
     try {
       const imageName = this.imageName();
       return new Promise((resolve, reject) => {
         const pictureRef = this.storage.ref(
-          'captures/' + this.authService.getToken() + '/' + this.imageName()
+          'captures/' +
+            this.authService.getToken() +
+            '/' +
+            this.imageName() +
+            '.jpg'
         );
         pictureRef
           .put(imageData)
@@ -169,16 +187,5 @@ export class CapturesService {
           });
       });
     } catch (e) {}
-  }
-
-  /*---This methods will be removed soon-----*/
-  public getCaptures() {
-    return this.capturesArray;
-  }
-
-  public getCapturesById(idCapture: number): Capture {
-    return this.capturesArray.filter(
-      (capture) => capture.idCapture === +idCapture
-    )[0];
   }
 }

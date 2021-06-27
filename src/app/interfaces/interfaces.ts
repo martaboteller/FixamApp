@@ -2,19 +2,20 @@ import { Timestamp } from 'rxjs';
 
 export interface Capture {
   idCapture: number;
-  imageName: string;
   imageUrl: string;
   name: string;
   description: string;
-  coordinates: string;
+  latitude: string;
+  longitude: string;
   date: string;
-  author: string;
+  uid: string;
   votes: number;
-  public: boolean;
+  publicState: boolean;
+  dislikeChecked: boolean;
 }
 
 export interface User {
-  idUser: number;
+  uid: string;
   username: string;
   password: string;
   name: string;
@@ -25,4 +26,13 @@ export interface User {
 export interface Photo {
   filepath: string;
   webviewPath: string;
+}
+
+export interface MapMarker {
+  position: {
+    lat: number;
+    lng: number;
+  };
+  votes: number;
+  idCapture: number;
 }

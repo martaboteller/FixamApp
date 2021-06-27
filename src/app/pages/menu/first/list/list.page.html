@@ -29,17 +29,16 @@
         *ngFor="let c of listOfCaptures"
         color="primary"
       >
-        <ion-card class="favCard" (click)="goToDetail(c.imageUrl,c.idCapture)">
+        <ion-card class="favCard">
           <ion-img
-            class="center"
-            src="assets/img/basic.png"
-            routerDirection="root"
+            src="{{c.imageUrl}}"
+            (click)="goToDetail(c.imageUrl,c.idCapture)"
           ></ion-img>
           <!--overlay in image-->
-          <div class="myOverlay" style="display: flex">
+          <div class="myOverlay">
             <!--show if public or not-->
             <div class="card-public">
-              <div *ngIf="c.public; else elseBlock">
+              <div *ngIf="c.publicState; else elseBlock">
                 <ion-icon name="eye-outline"></ion-icon>
               </div>
               <ng-template #elseBlock
@@ -47,11 +46,33 @@
               ></ng-template>
             </div>
             <!--show author-->
-            <div class="card-author">{{c.author}}</div>
+            <div class="card-author">{{getUsername(c.uid)}}</div>
           </div>
           <!--end overlay-->
           <!--Title-->
-          <ion-card-title> {{c.name}} </ion-card-title>
+
+          <ion-card-title>
+            <ion-row>
+              <ion-col size="9"> {{c.name}}</ion-col>
+              <ion-col size="2"
+                ><div *ngIf="c.dislikeChecked; else notCheckedBlock">
+                  <ion-img
+                    src="/assets/icon/dislike_black.png"
+                    class="dislikeImg"
+                    (click)="checkDislike(c.idCapture)"
+                  ></ion-img>
+                </div>
+                <ng-template #notCheckedBlock>
+                  <ion-img
+                    src="/assets/icon/dislike_white.png"
+                    class="dislikeImg"
+                    (click)="checkDislike(c.idCapture)"
+                  ></ion-img
+                ></ng-template>
+              </ion-col>
+            </ion-row>
+          </ion-card-title>
+
           <!--Content-->
           <ion-card-content>
             <ion-item lines="none"
@@ -60,12 +81,10 @@
               ></ion-item
             >
             <ion-item lines="none">
-              <ion-progress-bar
-                color="medium"
-                value="0.5"
-                style="width: 50%"
-              ></ion-progress-bar
-            ></ion-item>
+              <ion-badge slot="end" class="detailBadge" color="dark"
+                >{{c.votes}}</ion-badge
+              ></ion-item
+            >
           </ion-card-content>
         </ion-card>
       </ion-col>

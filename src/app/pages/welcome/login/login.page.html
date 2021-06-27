@@ -5,9 +5,9 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-content >
+  <ion-content>
     <form [formGroup]="loginForm" (ngSubmit)="login()">
-      <ion-item class="form_item" lines="full" >
+      <ion-item class="form_item" lines="full">
         <ion-label position="floating">Email</ion-label>
         <ion-input type="email" formControlName="email" required></ion-input>
       </ion-item>
@@ -23,8 +23,25 @@
 
       <ion-row>
         <ion-col>
-          <ion-button color="tertiary" class="login_button" size="medium" expand="block" type="submit"
+          <ion-button
+            color="tertiary"
+            class="login_button"
+            size="medium"
+            expand="block"
+            type="submit"
             >Entrar</ion-button
+          >
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button
+            color="primary"
+            class="testing_button"
+            size="medium"
+            expand="block"
+            (click)="testingAccess()"
+            >Test Marta</ion-button
           >
         </ion-col>
       </ion-row>
