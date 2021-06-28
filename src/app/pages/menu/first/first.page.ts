@@ -10,8 +10,4 @@ export class FirstPage implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit() {}
-
-  mapSelected() {
-    this.router.navigate(['../../menu/first/map', 'main']);
-  }
 }

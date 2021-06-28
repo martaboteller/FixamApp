@@ -55,6 +55,7 @@ export class LoginPage implements OnInit {
     }
   }
 
+  //TO-DO: Facilitate access when testing - remember to delete
   testingAccess() {
     const emailT = 'marta.boteller@gmail.com';
     const passwordT = 'marta123';

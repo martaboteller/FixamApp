@@ -1,4 +1,4 @@
-import { ElementRef, Injectable, ViewChild } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Geolocation, Position } from '@capacitor/geolocation';
 import { MapMarker } from 'src/app/interfaces/interfaces';
 
@@ -6,9 +6,6 @@ import { MapMarker } from 'src/app/interfaces/interfaces';
   providedIn: 'root',
 })
 export class GeolocationService {
-  //Variables
-  listOfCoordinates: MapMarker[];
-
   constructor() {}
 
   async getLocation(): Promise<MapMarker> {

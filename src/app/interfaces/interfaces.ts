@@ -1,5 +1,3 @@
-import { Timestamp } from 'rxjs';
-
 export interface Capture {
   idCapture: number;
   imageUrl: string;

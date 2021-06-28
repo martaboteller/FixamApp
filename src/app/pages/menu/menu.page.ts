@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterEvent } from '@angular/router';
+import { Router, RouterEvent } from '@angular/router';
 import { Capture, User } from 'src/app/interfaces/interfaces';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { CapturesService } from 'src/app/services/captures/captures.service';
+import { CameraService } from 'src/app/services/camera/camera.service';
 
 import { ThemeColorsService } from 'src/app/services/themeColors/themeColors.service';
 
@@ -14,7 +14,6 @@ import { ThemeColorsService } from 'src/app/services/themeColors/themeColors.ser
 export class MenuPage implements OnInit {
   //Variables
   idCapture: number;
-  imageName: string;
   imageUrl: string;
   userLogged: User;
   darkValue: any;
@@ -41,7 +40,7 @@ export class MenuPage implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private captureService: CapturesService,
+    private cameraService: CameraService,
     private router: Router,
     private themeColorsService: ThemeColorsService
   ) {
@@ -58,7 +57,7 @@ export class MenuPage implements OnInit {
   }
 
   async takePhoto() {
-    this.captureService
+    this.cameraService
       .takePhoto()
       .then((photoReturn) => {
         this.imageUrl = photoReturn['imageUrl'];

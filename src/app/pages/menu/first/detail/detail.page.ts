@@ -5,6 +5,7 @@ import { Capture } from 'src/app/interfaces/interfaces';
 import { CapturesService } from 'src/app/services/captures/captures.service';
 import { AlertController, NavParams, ToastController } from '@ionic/angular';
 import { UsersService } from 'src/app/services/users/users.service';
+import { CameraService } from 'src/app/services/camera/camera.service';
 
 @Component({
   selector: 'app-detail',
@@ -19,10 +20,13 @@ export class DetailPage implements OnInit {
   submitted = false;
   deleted = false;
   editable = false;
+  isNewEntry: boolean;
   detailForm: FormGroup;
+  dislikeChecked: boolean = false;
 
   constructor(
-    private captureService: CapturesService,
+    private capturesService: CapturesService,
+    private cameraService: CameraService,
     private usersService: UsersService,
     private route: ActivatedRoute,
     private router: Router,
@@ -37,24 +41,26 @@ export class DetailPage implements OnInit {
 
   buildForm(): void {
     this.detailForm = new FormGroup({
-      captureName: new FormControl(null, Validators.required),
-      captureNameEditable: new FormControl(null, Validators.required),
-      captureDescription: new FormControl(null, Validators.required),
-      captureDescriptionEditable: new FormControl(null, Validators.required),
-      publicToggle: new FormControl(null, Validators.required),
-      publicToggleEditable: new FormControl(null),
+      captureNameEditable: new FormControl(
+        { value: null },
+        Validators.required
+      ),
+      captureDescriptionEditable: new FormControl(Validators.required),
+      publicToggleEditable: new FormControl('', Validators.required),
     });
   }
 
-  //Show photo
+  //Depending on if newEntry or not show diferent htmlElements
   loadDetailCapture() {
-    if (this.captureService.isNewEntry) {
-      this.activeCapture = this.captureService.savedCapture;
+    this.imageUrl = this.route.snapshot.paramMap.get('url');
+    this.idCapture = Number(this.route.snapshot.paramMap.get('idCapture'));
+
+    if (this.isNewEntry) {
+      this.activeCapture = this.cameraService.savedCapture;
       this.editable = true;
+      console.log('What is the public state ' + this.activeCapture.publicState);
     } else {
-      this.imageUrl = this.route.snapshot.paramMap.get('url');
-      this.idCapture = Number(this.route.snapshot.paramMap.get('idCapture'));
-      this.activeCapture = this.captureService.filterCaptureById(
+      this.activeCapture = this.capturesService.filterCaptureById(
         this.idCapture
       );
     }
@@ -64,7 +70,7 @@ export class DetailPage implements OnInit {
     return this.usersService.filterUserByUid(uid);
   }
 
-  //Update capture
+  //Update capture when 'Save' button is clicked
   saveActiveCapture(): void {
     const savedCapture: Capture = {
       imageUrl: this.activeCapture.imageUrl,
@@ -83,55 +89,79 @@ export class DetailPage implements OnInit {
     this.back();
   }
 
-  //Save capture
+  //Save capture at Firebase
   saveCapture(savedCapture: Capture): void {
-    this.captureService.updateCapture(savedCapture).then(() => {
-      console.log('Created new item successfully!');
+    this.capturesService.updateCapture(savedCapture).then(() => {
       this.submitted = true;
     });
   }
 
-  //Edit capture
+  //Update dislike status
+  checkDislike(idCapture: number) {
+    if (
+      this.capturesService.filterCaptureById(this.activeCapture.idCapture) !=
+      null
+    ) {
+      this.capturesService.checkDislike(idCapture);
+    }
+  }
+
+  //Edit capture when 'Edit' button is clicked (boolean changed)
   editCapture() {
     this.editable = true;
   }
 
+  //Ask for confirmation when 'Delete' button is clicked
   callConfirm(idCapture: number) {
-    this.alertController
-      .create({
-        header: '¿Deseas eliminar la captura?',
-        subHeader: '',
-        message: '',
-        buttons: [
-          {
-            text: 'No',
-            handler: () => {
-              console.log('Captura no eliminada');
+    if (
+      this.capturesService.filterCaptureById(this.activeCapture.idCapture) !=
+      null
+    ) {
+      this.alertController
+        .create({
+          header: '¿Deseas eliminar la captura?',
+          subHeader: '',
+          message: '',
+          buttons: [
+            {
+              text: 'No',
+              handler: () => {
+                console.log('Captura no eliminada');
+              },
             },
-          },
-          {
-            text: 'Si',
-            handler: () => {
-              this.deleteCapture(idCapture);
-              this.back();
-              console.log('Captura eliminada');
+            {
+              text: 'Si',
+              handler: () => {
+                this.deleteCapture(idCapture, this.imageUrl);
+                this.back();
+                console.log('Captura eliminada');
+              },
             },
-          },
-        ],
-      })
-      .then((res) => {
-        res.present();
-      });
+          ],
+        })
+        .then((res) => {
+          res.present();
+        });
+    }
   }
 
-  //Delete capture
-  deleteCapture(idCapture: number): void {
+  //Delete capture at Firebase
+  deleteCapture(idCapture: number, imageUrl: string): void {
+    //Delete capture
     const id = idCapture.toString();
-    this.captureService.deleteCapture(id);
+    this.capturesService.deleteCapture(id);
     this.deleted = true;
+    //Delete stored image
+    this.cameraService.deleteImage(imageUrl);
     this.captureDeletedToast();
   }
 
+  //If new entry and user does not save delete photo at Firestorage
+  deleteCaptureIfNotSaved() {
+    this.cameraService.deleteImage(this.imageUrl);
+  }
+
+  //TO-DO: We can delete this?
   async captureDeletedToast() {
     const toast = await this.toast.create({
       message: 'Captura eliminada',
@@ -140,12 +170,29 @@ export class DetailPage implements OnInit {
     toast.present();
   }
 
+  //From detail page to map page (provide mapMarker)
   goToMap(idCapture: number) {
-    const mapMarker = this.captureService.filterLocationById(idCapture);
-    this.router.navigate(['../../menu/first/map', mapMarker]);
+    if (
+      this.capturesService.filterCaptureById(this.activeCapture.idCapture) !=
+      null
+    ) {
+      const mapMarker = this.capturesService.filterLocationById(idCapture);
+      this.router.navigate([
+        '../../menu/first/map',
+        mapMarker.idCapture.toString(),
+      ]);
+    }
   }
 
   back() {
+    //If capture has not been saved delete photo
+    if (
+      this.capturesService.filterCaptureById(this.activeCapture.idCapture) ==
+      null
+    ) {
+      this.deleteCaptureIfNotSaved();
+    }
+    this.isNewEntry = false;
     this.router.navigate(['../../menu/first/list']);
   }
 }

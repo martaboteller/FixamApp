@@ -7,7 +7,9 @@ const THEME_KEY = 'selected-app-theme';
   providedIn: 'root',
 })
 export class ThemeColorsService {
+  //Variables
   sharedDarkValue: any;
+
   constructor(private storage: Storage) {}
 
   setAppTheme(dark) {
