@@ -56,7 +56,7 @@ export class CapturesService implements OnInit {
   //Check if capture exists
   doesExist(idCapture: number): boolean {
     try {
-      this.filterLocationById(idCapture);
+      const name = this.filterCaptureById(idCapture).name;
       return true;
     } catch (e) {
       return false;
