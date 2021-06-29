@@ -1,9 +1,5 @@
-import {
-   Injectable,
-} from '@angular/core';
-import {
-  AngularFireStorage,
-} from '@angular/fire/storage';
+import { Injectable } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/storage';
 import {
   Camera,
   CameraResultType,
@@ -19,10 +15,9 @@ import { GeolocationService } from '../geolocation/geolocation.service';
 })
 export class CameraService {
   //Variables
-  isNewEntry: boolean;
-  savedCapture: Capture;
-  idCapture: number;
-  photoName: string;
+  savedCapture: Capture = <Capture>{};
+  idCapture: number = 0;
+  photoName: string = '';
 
   constructor(
     private geolocationService: GeolocationService,
@@ -55,7 +50,6 @@ export class CameraService {
     const long = (await coordinatesPhoto).position.lng.toString();
 
     //Create a new object capture
-    this.isNewEntry = true;
     const newCapture: Capture = {
       imageUrl: urlPhoto.toString(),
       idCapture: this.idCapture,

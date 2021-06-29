@@ -56,14 +56,15 @@
               <ion-toggle
                 formControlName="publicToggleEditable"
                 color="tertiary"
-                checked="{{activeCapture.publicState}}"
+                [checked]="activeCapture.publicState"
+                [(ngModel)]="activeCapture.publicState"
                 disabled="false"
               ></ion-toggle>
             </div>
             <ng-template #elseBlockToggle>
               <ion-toggle
                 color="tertiary"
-                checked="{{activeCapture.publicState}}"
+                [checked]="activeCapture.publicState"
                 disabled="true"
               ></ion-toggle
             ></ng-template>

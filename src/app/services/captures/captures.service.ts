@@ -56,6 +56,8 @@ export class CapturesService implements OnInit {
   //Check if capture exists
   doesExist(idCapture: number): boolean {
     try {
+      this.getCapturesFromFirebase();
+      this.saveCapturesToArray();
       const name = this.filterCaptureById(idCapture).name;
       return true;
     } catch (e) {

@@ -14,9 +14,9 @@ import { CameraService } from 'src/app/services/camera/camera.service';
 })
 export class DetailPage implements OnInit {
   //Variables
-  imageUrl: string;
-  idCapture: number;
-  activeCapture: Capture;
+  imageUrl: string = '';
+  idCapture: number = 0;
+  activeCapture: Capture = <Capture>{};
   submitted = false;
   deleted = false;
   editable = false;
@@ -40,7 +40,10 @@ export class DetailPage implements OnInit {
 
   buildForm(): void {
     this.detailForm = new FormGroup({
-      captureNameEditable: new FormControl({ value: null },Validators.required),
+      captureNameEditable: new FormControl(
+        { value: null },
+        Validators.required
+      ),
       captureDescriptionEditable: new FormControl(Validators.required),
       publicToggleEditable: new FormControl('', Validators.required),
     });
@@ -134,7 +137,7 @@ export class DetailPage implements OnInit {
         .then((res) => {
           res.present();
         });
-    }else{
+    } else {
       console.log('The capture does not exist still');
     }
   }
@@ -172,7 +175,7 @@ export class DetailPage implements OnInit {
         '../../menu/first/map',
         mapMarker.idCapture.toString(),
       ]);
-    }else{
+    } else {
       console.log("Can't go to map, capture does not exist still");
     }
   }
@@ -180,7 +183,7 @@ export class DetailPage implements OnInit {
   back() {
     //If capture has not been saved delete photo
     if (!this.capturesService.doesExist(this.idCapture)) {
-      console.log('Exists? '+this.capturesService.doesExist(this.idCapture));
+      console.log('Exists? ' + this.capturesService.doesExist(this.idCapture));
       this.deleteCaptureIfNotSaved();
     }
     this.router.navigate(['../../menu/first/list']);
