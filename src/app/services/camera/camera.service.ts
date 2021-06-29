@@ -1,12 +1,8 @@
 import {
-  AfterContentChecked,
-  Injectable,
-  OnChanges,
-  OnInit,
+   Injectable,
 } from '@angular/core';
 import {
   AngularFireStorage,
-  AngularFireStorageReference,
 } from '@angular/fire/storage';
 import {
   Camera,
@@ -100,6 +96,7 @@ export class CameraService {
 
   //Delete photo at Firebase if user does not save it
   async deleteImage(imageUrl: string) {
+    console.log('I am going to delete this!!' + imageUrl);
     let pictureRef = this.storage.refFromURL(imageUrl);
     pictureRef.delete();
   }

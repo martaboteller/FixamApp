@@ -20,7 +20,6 @@ export class DetailPage implements OnInit {
   submitted = false;
   deleted = false;
   editable = false;
-  isNewEntry: boolean;
   detailForm: FormGroup;
   dislikeChecked: boolean = false;
 
@@ -41,10 +40,7 @@ export class DetailPage implements OnInit {
 
   buildForm(): void {
     this.detailForm = new FormGroup({
-      captureNameEditable: new FormControl(
-        { value: null },
-        Validators.required
-      ),
+      captureNameEditable: new FormControl({ value: null },Validators.required),
       captureDescriptionEditable: new FormControl(Validators.required),
       publicToggleEditable: new FormControl('', Validators.required),
     });
@@ -86,7 +82,7 @@ export class DetailPage implements OnInit {
       dislikeChecked: this.activeCapture.dislikeChecked,
     };
     this.saveCapture(savedCapture);
-    this.back();
+    this.router.navigate(['../../menu/first/list']);
   }
 
   //Save capture at Firebase
@@ -112,10 +108,7 @@ export class DetailPage implements OnInit {
 
   //Ask for confirmation when 'Delete' button is clicked
   callConfirm(idCapture: number) {
-    if (
-      this.capturesService.filterCaptureById(this.activeCapture.idCapture) !=
-      null
-    ) {
+    if (this.capturesService.doesExist(idCapture)) {
       this.alertController
         .create({
           header: '¿Deseas eliminar la captura?',
@@ -141,6 +134,8 @@ export class DetailPage implements OnInit {
         .then((res) => {
           res.present();
         });
+    }else{
+      console.log('The capture does not exist still');
     }
   }
 
@@ -171,27 +166,23 @@ export class DetailPage implements OnInit {
 
   //From detail page to map page (provide mapMarker)
   goToMap(idCapture: number) {
-    if (
-      this.capturesService.filterCaptureById(this.activeCapture.idCapture) !=
-      null
-    ) {
+    if (this.capturesService.doesExist(idCapture)) {
       const mapMarker = this.capturesService.filterLocationById(idCapture);
       this.router.navigate([
         '../../menu/first/map',
         mapMarker.idCapture.toString(),
       ]);
+    }else{
+      console.log("Can't go to map, capture does not exist still");
     }
   }
 
   back() {
     //If capture has not been saved delete photo
-    if (
-      this.capturesService.filterCaptureById(this.activeCapture.idCapture) ==
-      null
-    ) {
+    if (!this.capturesService.doesExist(this.idCapture)) {
+      console.log('Exists? '+this.capturesService.doesExist(this.idCapture));
       this.deleteCaptureIfNotSaved();
     }
-    this.isNewEntry = false;
     this.router.navigate(['../../menu/first/list']);
   }
 }

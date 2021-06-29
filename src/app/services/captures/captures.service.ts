@@ -20,12 +20,12 @@ export class CapturesService implements OnInit {
 
   ngOnInit() {
     this.getCapturesFromFirebase();
+    this.saveCapturesToArray();
   }
 
   //Get all collections of captures from Firebase
   getCapturesFromFirebase(): AngularFirestoreCollection<Capture> {
     this.capturesRef = this.angularFirestore.collection('captures');
-    this.saveCapturesToArray();
     return this.capturesRef;
   }
 
@@ -93,6 +93,7 @@ export class CapturesService implements OnInit {
     try {
       this.capturesRef.doc(capture.idCapture.toString()).set({ ...capture });
       this.getCapturesFromFirebase();
+      this.saveCapturesToArray();
       this.success = true;
     } catch (e) {
       console.log(e);
@@ -121,6 +122,7 @@ export class CapturesService implements OnInit {
     try {
       this.capturesRef.doc(idCapture).delete();
       this.getCapturesFromFirebase();
+      this.saveCapturesToArray();
       this.success = true;
     } catch (e) {
       console.log(e);
