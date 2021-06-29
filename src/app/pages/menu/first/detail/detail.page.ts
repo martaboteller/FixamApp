@@ -55,7 +55,7 @@ export class DetailPage implements OnInit {
     this.imageUrl = this.route.snapshot.paramMap.get('url');
     this.idCapture = Number(this.route.snapshot.paramMap.get('idCapture'));
 
-    if (this.isNewEntry) {
+    if (!this.capturesService.doesExist(this.idCapture)) {
       this.activeCapture = this.cameraService.savedCapture;
       this.editable = true;
       console.log('What is the public state ' + this.activeCapture.publicState);
@@ -91,18 +91,17 @@ export class DetailPage implements OnInit {
 
   //Save capture at Firebase
   saveCapture(savedCapture: Capture): void {
-    this.capturesService.updateCapture(savedCapture).then(() => {
+    if (this.capturesService.updateCapture(savedCapture)) {
       this.submitted = true;
-    });
+    }
   }
 
   //Update dislike status
   checkDislike(idCapture: number) {
-    if (
-      this.capturesService.filterCaptureById(this.activeCapture.idCapture) !=
-      null
-    ) {
+    if (this.capturesService.doesExist(idCapture)) {
       this.capturesService.checkDislike(idCapture);
+    } else {
+      console.log("Can't dislike, capture does not exist");
     }
   }
 

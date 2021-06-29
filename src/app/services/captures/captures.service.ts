@@ -14,6 +14,7 @@ export class CapturesService implements OnInit {
   capturesFromFirebase: Capture[];
   capturesRef: AngularFirestoreCollection<Capture>;
   listOfCoordinates: MapMarker[] = [];
+  success: boolean = false;
 
   constructor(private angularFirestore: AngularFirestore) {}
 
@@ -52,6 +53,16 @@ export class CapturesService implements OnInit {
     )[0];
   }
 
+  //Check if capture exists
+  doesExist(idCapture: number): boolean {
+    try {
+      this.filterLocationById(idCapture);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   //Get all locations from all captures
   getAllLocations(): MapMarker[] {
     for (let i = 0; i < this.capturesFromFirebase.length; i++) {
@@ -78,10 +89,15 @@ export class CapturesService implements OnInit {
   }
 
   //Save or update a capture document to Firebase
-  updateCapture(capture: Capture): any {
-    return this.capturesRef
-      .doc(capture.idCapture.toString())
-      .set({ ...capture });
+  updateCapture(capture: Capture): boolean {
+    try {
+      this.capturesRef.doc(capture.idCapture.toString()).set({ ...capture });
+      this.getCapturesFromFirebase();
+      this.success = true;
+    } catch (e) {
+      console.log(e);
+    }
+    return this.success;
   }
 
   //Update dislike status at Firebase
@@ -101,7 +117,14 @@ export class CapturesService implements OnInit {
   }
 
   //Delete a capture document from Firebase
-  deleteCapture(idCapture: string): Promise<void> {
-    return this.capturesRef.doc(idCapture).delete();
+  deleteCapture(idCapture: string): boolean {
+    try {
+      this.capturesRef.doc(idCapture).delete();
+      this.getCapturesFromFirebase();
+      this.success = true;
+    } catch (e) {
+      console.log(e);
+    }
+    return this.success;
   }
 }
