@@ -6,6 +6,7 @@ import { CapturesService } from 'src/app/services/captures/captures.service';
 import { AlertController, NavParams, ToastController } from '@ionic/angular';
 import { UsersService } from 'src/app/services/users/users.service';
 import { CameraService } from 'src/app/services/camera/camera.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-detail',
@@ -20,6 +21,7 @@ export class DetailPage implements OnInit {
   submitted = false;
   deleted = false;
   editable = false;
+  belongsToUser: boolean = false;
   detailForm: FormGroup;
   dislikeChecked: boolean = false;
 
@@ -30,7 +32,8 @@ export class DetailPage implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private toast: ToastController,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -56,9 +59,14 @@ export class DetailPage implements OnInit {
 
     if (!this.capturesService.doesExist(this.idCapture)) {
       this.activeCapture = this.cameraService.savedCapture;
+      this.belongsToUser = true;
       this.editable = true;
-      console.log('What is the public state ' + this.activeCapture.publicState);
     } else {
+      //Determinate if capture belongs to user
+      this.belongsToUser = this.capturesService.belongsToLoggedUser(
+        this.idCapture,
+        this.authService.getToken()
+      );
       this.activeCapture = this.capturesService.filterCaptureById(
         this.idCapture
       );
@@ -99,6 +107,7 @@ export class DetailPage implements OnInit {
   checkDislike(idCapture: number) {
     if (this.capturesService.doesExist(idCapture)) {
       this.capturesService.checkDislike(idCapture);
+      this.loadDetailCapture();
     } else {
       console.log("Can't dislike, capture does not exist");
     }
@@ -155,6 +164,7 @@ export class DetailPage implements OnInit {
 
   //If new entry and user does not save delete photo at Firestorage
   deleteCaptureIfNotSaved() {
+    console.log('Deleting capture image');
     this.cameraService.deleteImage(this.imageUrl);
   }
 

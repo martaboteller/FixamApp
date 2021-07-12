@@ -70,4 +70,19 @@ export class LoginPage implements OnInit {
         console.log(error);
       });
   }
+  //TO-DO: Facilitate access when testing - remember to delete
+  testingAccess2() {
+    const emailT = 'marta.boteller@outlook.com';
+    const passwordT = 'martaabc';
+    this.authService
+      .login(emailT, passwordT)
+      .then((response) => {
+        this.authService.setUserLogged(response);
+        this.router.navigate(['../../menu/first/list']);
+      })
+      .catch((error) => {
+        this.presentToast();
+        console.log(error);
+      });
+  }
 }

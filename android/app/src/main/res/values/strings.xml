@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">fixamapp</string>
-    <string name="title_activity_main">fixamapp</string>
-    <string name="package_name">io.ionic.starter</string>
-    <string name="custom_url_scheme">io.ionic.starter</string>
+    <string name="app_name">Fixam</string>
+    <string name="title_activity_main">Fixam</string>
+    <string name="package_name">com.cifocourse.fixam</string>
+    <string name="custom_url_scheme">com.cifocourse.fixam</string>
 </resources>

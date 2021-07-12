@@ -9,23 +9,19 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
-export class CapturesService implements OnInit {
+export class CapturesService {
   //Variables
-  capturesFromFirebase: Capture[];
-  capturesRef: AngularFirestoreCollection<Capture>;
-  listOfCoordinates: MapMarker[] = [];
+  public capturesFromFirebase: Capture[];
+  public capturesRef: AngularFirestoreCollection<Capture>;
+  public listOfCoordinates: MapMarker[] = [];
   success: boolean = false;
 
   constructor(private angularFirestore: AngularFirestore) {}
 
-  ngOnInit() {
-    this.getCapturesFromFirebase();
-    this.saveCapturesToArray();
-  }
-
   //Get all collections of captures from Firebase
   getCapturesFromFirebase(): AngularFirestoreCollection<Capture> {
     this.capturesRef = this.angularFirestore.collection('captures');
+    this.saveCapturesToArray();
     return this.capturesRef;
   }
 
@@ -46,11 +42,31 @@ export class CapturesService implements OnInit {
       });
   }
 
+  //Select only captures from one user
+  filterCapturesByUser(uid: string): Capture[] {
+    return this.capturesFromFirebase.filter((capture) => capture.uid === uid);
+  }
+
   //Select one capture from the array of captures
   filterCaptureById(idCapture: number): Capture {
     return this.capturesFromFirebase.filter(
       (capture) => capture.idCapture === +idCapture
     )[0];
+  }
+
+  getUrlImageById(idCapture: number): String {
+    return this.capturesFromFirebase.filter(
+      (capture) => capture.idCapture === +idCapture
+    )[0].imageUrl;
+  }
+
+  //Check if capture belongs to logged user
+  belongsToLoggedUser(idCapture: number, uid: string): boolean {
+    if (this.filterCaptureById(idCapture).uid === uid) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   //Check if capture exists
@@ -67,6 +83,10 @@ export class CapturesService implements OnInit {
 
   //Get all locations from all captures
   getAllLocations(): MapMarker[] {
+    if (this.capturesFromFirebase.length === 0) {
+      this.getCapturesFromFirebase();
+      console.log('Empty captures list');
+    }
     for (let i = 0; i < this.capturesFromFirebase.length; i++) {
       this.listOfCoordinates.push({
         position: {
@@ -82,9 +102,10 @@ export class CapturesService implements OnInit {
 
   //Select one location from the array of locations
   filterLocationById(idCapture: number): MapMarker {
-    if (this.listOfCoordinates.length == 0) {
+    if (this.listOfCoordinates.length === 0) {
       this.getAllLocations();
     }
+    console.log(this.listOfCoordinates.length.toString);
     return this.listOfCoordinates.filter(
       (mapMarker) => mapMarker.idCapture === +idCapture
     )[0];
@@ -95,7 +116,6 @@ export class CapturesService implements OnInit {
     try {
       this.capturesRef.doc(capture.idCapture.toString()).set({ ...capture });
       this.getCapturesFromFirebase();
-      this.saveCapturesToArray();
       this.success = true;
     } catch (e) {
       console.log(e);

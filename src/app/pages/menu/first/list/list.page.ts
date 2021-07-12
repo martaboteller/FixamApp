@@ -5,6 +5,7 @@ import { User } from 'src/app/interfaces/interfaces';
 import { CapturesService } from 'src/app/services/captures/captures.service';
 import { map } from 'rxjs/operators';
 import { UsersService } from 'src/app/services/users/users.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-list',
@@ -16,11 +17,13 @@ export class ListPage implements OnInit {
   public listOfCaptures: Capture[];
   public listOfUsers: User[];
   public dislikeChecked: boolean = false;
+  public showAllCaptures: boolean = true;
 
   constructor(
     private router: Router,
     private capturesService: CapturesService,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -78,5 +81,20 @@ export class ListPage implements OnInit {
   //Update dislike status
   checkDislike(idCapture: number) {
     this.capturesService.checkDislike(idCapture);
+  }
+
+  //Change between showing only the user captures or all captures
+  changeDisplayMode(ev) {
+    if (ev.detail.checked) {
+      console.log('Show all captures');
+      this.showAllCaptures = true;
+      this.loadCaptures();
+    } else {
+      console.log('Show only my captures');
+      this.showAllCaptures = false;
+      this.listOfCaptures = this.capturesService.filterCapturesByUser(
+        this.authService.getToken()
+      );
+    }
   }
 }

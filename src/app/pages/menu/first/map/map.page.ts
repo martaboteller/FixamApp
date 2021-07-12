@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MapMarker } from 'src/app/interfaces/interfaces';
 import { CapturesService } from 'src/app/services/captures/captures.service';
 import { GeolocationService } from 'src/app/services/geolocation/geolocation.service';
@@ -22,7 +22,8 @@ export class MapPage {
   constructor(
     private captureService: CapturesService,
     private geolocationService: GeolocationService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   async ionViewDidEnter() {
@@ -53,6 +54,7 @@ export class MapPage {
       center: latLng,
       zoom: 15,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
+      clickableIcons: true,
     };
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
     google.maps.event.addListenerOnce(this.map, 'idle', () => {
@@ -68,11 +70,19 @@ export class MapPage {
   }
 
   addMarker(marker: MapMarker) {
-    return new google.maps.Marker({
+    const mapMarker = new google.maps.Marker({
       position: marker.position,
       map: this.map,
       label: marker.votes.toString(),
       icon: '/assets/icon/my_marker.png',
+      title: marker.idCapture.toString(),
     });
+
+    mapMarker.addListener('click', () => {
+      const idCapture = mapMarker.title;
+      const urlImage = this.captureService.getUrlImageById(marker.idCapture);
+      this.router.navigate(['../../menu/first/detail/', urlImage, idCapture]);
+    });
+    return mapMarker;
   }
 }

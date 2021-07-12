@@ -1,76 +1,88 @@
-.container {
-  margin: 0% 8% 0% 8%;
-  //background-color: var(--ion-color-primary);
-  border-radius: 10px;
-}
-
-.detailImage {
-  border-radius: 10px;
-}
-
-.myOverlay {
-  width: 100%;
-  height: 30px;
-  position: absolute;
-  top: 35%;
-  display: flex;
-  opacity: 50%;
-  background: var(--ion-color-primary);
-  margin: 10%;
+.containerRow {
+  //top right bottom left
+  margin: 5% 5% 5% 5% !important;
+  //background-color: green;
 }
 
 .detailBadge {
   position: absolute;
-  align-items: flex-end;
-  background-color: var(--ion-color-tertiary);
+  display: flex;
+  bottom: 10%;
+  left: 5%;
+}
+
+.detailLike {
+  position: absolute;
+  display: flex;
+  bottom: 10%;
+  right: 5%;
+}
+
+.detailImage {
+  border-radius: 10px;
+  height: 220px;
+  max-height: 220px;
+  width: 100%;
+}
+
+.myOverlay {
+  width: 100%;
+  position: absolute;
+  top: 5%;
+  display: flex;
+  opacity: 80%;
 }
 
 .detailDate {
   flex-basis: 100%;
   color: #fff;
-  background-color: lightcoral;
+  margin-left: 5%;
+  text-align: left;
 }
 
 .detailUser {
   flex-basis: 100%;
   color: #fff;
-  background-color: lightseagreen;
-}
-
-.detailPublicState {
-  margin-top: 6%;
+  margin-right: 10%;
   text-align: right;
 }
 
-.detailToggle {
-  margin-top: 5%;
-  text-align: left;
-}
-
 .detailCaptureName {
-  margin-top: 5%;
-  margin-left: 5%;
   text-align: left;
-  padding-left: 15px;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 18px;
+  padding-left: 2%;
   background-color: var(--ion-color-light);
   border-radius: 10px !important;
 }
 
-.dislikeImg {
-  margin-left: 12%;
-  margin-right: 22%;
-  margin-top: 80%;
+.detailPublicState {
+  text-align: right;
+  padding-top: 4%;
+  display: block;
+  height: 100%;
+}
+
+.detailToggle {
+  display: block;
+  padding-top: 2%;
+  width: 100%;
+  flex-basis: 100%;
 }
 
 .detailPageDescription {
   background-color: var(--ion-color-light);
   border-radius: 10px !important;
-  overflow: hidden;
   padding-left: 2%;
   padding-right: 2%;
-  padding-top: 2%;
+  text-align: left;
+}
+
+.detailPageTextArea {
+  height: 200px;
+  width: 100%;
+  resize: none;
+  overflow: scroll;
 }
 
 .coordinates {
@@ -78,21 +90,23 @@
   display: flex;
 }
 
+.buttonsContainer {
+  padding-top: 15%;
+  margin: 0% 5% 0% 5% !important;
+  display: flex;
+  text-align: center;
+}
+
 .detailButtonEdit {
-  margin-top: 20%;
-  margin-bottom: 20%;
-  margin-left: 75%;
+  flex-basis: 100%;
 }
 .detailButtonSave {
-  margin-top: 20%;
-  margin-bottom: 20%;
-  margin-left: 50%;
+  flex-basis: 100%;
 }
 
 .detailButtonDelete {
+  flex-basis: 100%;
   font-size: 30px;
+  margin-top: 5%;
   color: var(--ion-color-medium);
-  margin-top: 22%;
-  margin-bottom: 20%;
-  margin-left: 40%;
 }

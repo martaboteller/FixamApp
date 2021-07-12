@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>636720841226-kgm0suc9aj7montcsmrc3kjmpfubohj9.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.636720841226-kgm0suc9aj7montcsmrc3kjmpfubohj9</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBI1rhNOZ5IKSNR34yyYZ8za4Ugy1lKxaM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>636720841226</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.cifocourse.fixam</string>
+	<key>PROJECT_ID</key>
+	<string>fixam-b9324</string>
+	<key>STORAGE_BUCKET</key>
+	<string>fixam-b9324.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:636720841226:ios:ffb8bd89bb539e3f1715f3</string>
+	<key>DATABASE_URL</key>
+	<string>https://fixam-b9324-default-rtdb.europe-west1.firebasedatabase.app</string>
+</dict>
+</plist>
