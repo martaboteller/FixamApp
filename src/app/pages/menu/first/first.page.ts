@@ -35,7 +35,7 @@ export class FirstPage implements OnInit {
         PushNotifications.register();
       } else {
         //Show some error
-        console.log('Notifications permission not grantednp');
+        console.log('Notifications permission not granted');
       }
     });
 
