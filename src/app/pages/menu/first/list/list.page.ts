@@ -16,6 +16,7 @@ export class ListPage implements OnInit {
   public listOfCaptures: Capture[];
   public listOfUsers: User[];
   public dislikeChecked: boolean = false;
+  user: User = {} as User;
 
   constructor(
     private router: Router,
@@ -26,6 +27,7 @@ export class ListPage implements OnInit {
   ngOnInit(): void {
     this.loadCaptures();
     this.loadUsers();
+    this.getUserLogged();
   }
 
   //Call captureService and retrive captures from Firebase
@@ -62,6 +64,26 @@ export class ListPage implements OnInit {
       .subscribe((data) => {
         this.listOfUsers = data;
       });
+  }
+
+  getUserLogged(){
+    this.usersService.getUserLogged().subscribe(
+      response => {
+        this.user.name = response.name;
+        this.user.surname = response.surname;
+        this.user.username = response.username;
+        this.user.uid = response.uid;
+        this.user.email = response.email;
+        this.user.avatarFilename = response.avatarFilename;
+        this.user.avatarURL = response.avatarURL;
+
+        this.usersService.sendUserData(this.user);
+        
+      },
+      error => {
+        console.log(error);
+      }
+    )
   }
 
   //Given a uid get the username

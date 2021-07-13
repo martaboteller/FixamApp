@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Capture, User } from 'src/app/interfaces/interfaces';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CameraService } from 'src/app/services/camera/camera.service';
 
 import { ThemeColorsService } from 'src/app/services/themeColors/themeColors.service';
+import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
   selector: 'app-menu',
@@ -15,9 +17,10 @@ export class MenuPage implements OnInit {
   //Variables
   idCapture: number;
   imageUrl: string;
-  userLogged: User;
+  userLogged: User = {} as User;
   darkValue: any;
   photoReturn: Capture;
+  subscription: Subscription;
   pages = [
     {
       title: 'First',
@@ -42,13 +45,15 @@ export class MenuPage implements OnInit {
     private authService: AuthService,
     private cameraService: CameraService,
     private router: Router,
-    private themeColorsService: ThemeColorsService
+    private themeColorsService: ThemeColorsService,
+    private userService: UsersService
   ) {
     this.router.events.subscribe((event: RouterEvent) => {
       if (event && event.url) {
         this.selectedPath = event.url;
       }
     });
+    this.getUserData();
   }
 
   ngOnInit() {
@@ -71,6 +76,14 @@ export class MenuPage implements OnInit {
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  getUserData() {
+    this.subscription = this.userService.onMessage().subscribe(
+      response => {
+        this.userLogged = response.user;
+      }
+    )
   }
 
   logout() {
