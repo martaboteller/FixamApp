@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>User settings Page</ion-title>
+    <ion-title>Mi perfil</ion-title>
 
     <!-- Hamburger -->
     <ion-buttons slot="start">
@@ -11,4 +11,48 @@
 
 <ion-content>
   <!-- Content -->
+  <ion-header class="ion-no-border">
+    <ion-toolbar>
+      <h6 style="margin-left: 5%">Aquí podrás actualizar tu perfil</h6>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <ion-item>
+      <ion-avatar slot="start" *ngIf="!user.avatarURL">
+        <img src="../../../../assets/img/avatar_default.png" />
+      </ion-avatar>
+      <ion-avatar slot="start" *ngIf="user.avatarURL">
+        <img src="{{user.avatarURL}}" />
+      </ion-avatar>
+      <ion-label>{{user.username}}</ion-label>
+      <ion-button *ngIf="!user.avatarURL" slot="end" (click)="openModal()"
+        ><ion-icon name="add-circle" style="margin-right: 2%"></ion-icon>Añadir
+        avatar</ion-button
+      >
+      <ion-button *ngIf="user.avatarURL" slot="end" (click)="openModal()"
+        >Cambiar avatar</ion-button
+      >
+    </ion-item>
+
+    <ion-card-content>
+      <form [formGroup]="updateForm" (ngSubmit)="updateUser()">
+        <ion-item-group>
+          <ion-item>
+            <ion-label position="fixed">Nombre</ion-label>
+            <ion-input type="text" formControlName="name"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="fixed">Apellidos</ion-label>
+            <ion-input type="text" formControlName="surname"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="fixed">Nick</ion-label>
+            <ion-input type="text" formControlName="username"></ion-input>
+          </ion-item>
+        </ion-item-group>
+        <ion-button type="submit" slot="center">Guardar Cambios</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

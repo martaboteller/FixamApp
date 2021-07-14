@@ -63,6 +63,8 @@ export class AuthService {
             surname: user.surname,
             username: user.username,
             email: user.email,
+            avatarFilename: null,
+            avatarURL: null
           });
           resolve(response);
         })

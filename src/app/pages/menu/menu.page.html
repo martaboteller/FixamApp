@@ -3,8 +3,16 @@
     <!--Side menu zone-->
     <ion-menu contentId="content">
       <ion-header>
-        <ion-toolbar color="primary">
-          <ion-title class="menu-title">Menu</ion-title>
+        <ion-toolbar style="padding: 2%" color="primary">
+          <ion-avatar slot="start" *ngIf="!userLogged.avatarURL">
+            <img src="../../../../assets/img/avatar_default.png" />
+          </ion-avatar>
+          <ion-avatar slot="start" *ngIf="userLogged.avatarURL">
+            <img src="{{userLogged.avatarURL}}" />
+          </ion-avatar>
+          <ion-title class="menu-title"
+            >Hola, {{userLogged.username}}</ion-title
+          >
         </ion-toolbar>
       </ion-header>
 

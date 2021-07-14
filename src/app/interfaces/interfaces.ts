@@ -19,6 +19,8 @@ export interface User {
   name: string;
   surname: string;
   email: string;
+  avatarFilename: string;
+  avatarURL: string
 }
 
 export interface Photo {

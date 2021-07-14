@@ -31,6 +31,7 @@ export class DetailPage implements OnInit {
     private usersService: UsersService,
     private route: ActivatedRoute,
     private router: Router,
+
     private toast: ToastController,
     private alertController: AlertController,
     private authService: AuthService
