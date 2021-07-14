@@ -20,7 +20,7 @@ export class MenuPage implements OnInit {
   photoReturn: Capture;
   pages = [
     {
-      title: 'First',
+      title: 'Captures',
       url: '/menu/first',
       icon: 'images-outline',
     },
