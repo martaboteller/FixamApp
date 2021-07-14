@@ -23,7 +23,7 @@ export class MenuPage implements OnInit {
   subscription: Subscription;
   pages = [
     {
-      title: 'First',
+      title: 'Captures',
       url: '/menu/first',
       icon: 'images-outline',
     },
