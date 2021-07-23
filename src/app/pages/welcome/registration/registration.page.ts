@@ -10,13 +10,9 @@ import { AuthService } from 'src/app/services/auth/auth.service';
   styleUrls: ['./registration.page.scss'],
 })
 export class RegistrationPage implements OnInit {
-
   registerForm: FormGroup;
 
-  constructor(
-    private auth: AuthService,
-    private router: Router
-  ) { }
+  constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.buildForm();
@@ -28,15 +24,12 @@ export class RegistrationPage implements OnInit {
       surname: new FormControl(null, Validators.required),
       password: new FormControl(null, Validators.required),
       username: new FormControl(null, Validators.required),
-      email: new FormControl(null, [
-        Validators.required,
-        Validators.email
-      ]),
+      email: new FormControl(null, [Validators.required, Validators.email]),
     });
   }
 
-  register(){
-    if(this.registerForm.valid){
+  register() {
+    if (this.registerForm.valid) {
       const user: User = {} as User;
       user.name = this.registerForm.get('name').value;
       user.surname = this.registerForm.get('surname').value;
@@ -44,17 +37,19 @@ export class RegistrationPage implements OnInit {
       user.password = this.registerForm.get('password').value;
       user.email = this.registerForm.get('email').value;
 
-      this.auth.register(user).then(
-        response => {
+      this.auth
+        .register(user)
+        .then((response) => {
           this.auth.setUserLogged(response.user.uid);
           this.router.navigate(['../../menu/first/list']);
-        }
-      ).catch(
-        error => {
+        })
+        .catch((error) => {
           console.log(error);
-        }
-      );
+        });
     }
   }
 
+  back() {
+    this.router.navigate(['/']);
+  }
 }

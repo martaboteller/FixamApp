@@ -85,4 +85,8 @@ export class LoginPage implements OnInit {
         console.log(error);
       });
   }
+
+  back() {
+    this.router.navigate(['/']);
+  }
 }

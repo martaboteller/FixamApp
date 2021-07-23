@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { Capture, User } from 'src/app/interfaces/interfaces';
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -15,25 +16,27 @@ import { UsersService } from 'src/app/services/users/users.service';
 })
 export class MenuPage implements OnInit {
   //Variables
+  language: string = this.translateService.currentLang;
   idCapture: number;
   imageUrl: string;
   userLogged: User = {} as User;
   darkValue: any;
   photoReturn: Capture;
   subscription: Subscription;
+
   pages = [
     {
-      title: 'Captures',
+      title: this.translateService.instant('menu.captures'),
       url: '/menu/first',
       icon: 'images-outline',
     },
     {
-      title: 'User settings',
+      title: this.translateService.instant('menu.settings'),
       url: '/menu/usersettings',
       icon: 'settings-outline',
     },
     {
-      title: 'About',
+      title: this.translateService.instant('menu.about'),
       url: '/menu/about',
       icon: 'information-circle-outline',
     },
@@ -46,7 +49,8 @@ export class MenuPage implements OnInit {
     private cameraService: CameraService,
     private router: Router,
     private themeColorsService: ThemeColorsService,
-    private userService: UsersService
+    private userService: UsersService,
+    private translateService: TranslateService
   ) {
     this.router.events.subscribe((event: RouterEvent) => {
       if (event && event.url) {
@@ -58,7 +62,6 @@ export class MenuPage implements OnInit {
 
   ngOnInit() {
     this.darkValue = this.darkBookean;
-    //console.log(this.darkValue);
   }
 
   async takePhoto() {
@@ -79,11 +82,9 @@ export class MenuPage implements OnInit {
   }
 
   getUserData() {
-    this.subscription = this.userService.onMessage().subscribe(
-      response => {
-        this.userLogged = response.user;
-      }
-    )
+    this.subscription = this.userService.onMessage().subscribe((response) => {
+      this.userLogged = response.user;
+    });
   }
 
   logout() {
@@ -96,7 +97,22 @@ export class MenuPage implements OnInit {
   }
 
   setTheme(ev) {
-    //console.log(ev);
     this.themeColorsService.setAppTheme(ev.detail.checked);
+  }
+
+  languageChange() {
+    this.translateService.use(this.language);
+
+    this.translateService.get('menu.captures').subscribe((trad) => {
+      this.pages[0].title = trad;
+    });
+
+    this.translateService.get('menu.settings').subscribe((trad) => {
+      this.pages[1].title = trad;
+    });
+
+    this.translateService.get('menu.about').subscribe((trad) => {
+      this.pages[2].title = trad;
+    });
   }
 }

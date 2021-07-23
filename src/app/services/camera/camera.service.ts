@@ -6,6 +6,7 @@ import {
   CameraSource,
   Photo,
 } from '@capacitor/camera';
+
 import { Capture } from 'src/app/interfaces/interfaces';
 import { AuthService } from '../auth/auth.service';
 import { GeolocationService } from '../geolocation/geolocation.service';
@@ -18,6 +19,7 @@ export class CameraService {
   savedCapture: Capture = <Capture>{};
   idCapture: number = 0;
   photoName: string = '';
+  resizedBlob: Blob;
 
   constructor(
     private geolocationService: GeolocationService,
@@ -39,9 +41,11 @@ export class CameraService {
     const imageBlob = await this.database64ToBlob(image.base64String);
     this.idCapture = this.imageName();
     this.photoName = this.idCapture + '.jpeg';
+
     const imageFile = new File([imageBlob], this.photoName, {
       type: 'image/jpeg',
     });
+
     const urlPhoto = await this.storeImage(imageFile);
 
     //Ask for position

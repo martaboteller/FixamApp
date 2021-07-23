@@ -1,19 +1,31 @@
 <ion-app>
   <ion-header>
     <ion-toolbar color="tertiary">
-      <ion-title>Login Page</ion-title>
+      <ion-title>{{'login.toolbar' | translate}}</ion-title>
+      <ion-buttons slot="end">
+        <ion-icon
+          style="padding-right: 5px"
+          size="small"
+          name="arrow-back"
+          (click)="back()"
+        ></ion-icon>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
 
   <ion-content>
     <form [formGroup]="loginForm" (ngSubmit)="login()">
       <ion-item class="form_item" lines="full">
-        <ion-label position="floating">Email</ion-label>
+        <ion-label position="floating"
+          >{{'login.placeholderEmail' | translate}}</ion-label
+        >
         <ion-input type="email" formControlName="email" required></ion-input>
       </ion-item>
 
       <ion-item class="form_item" lines="full">
-        <ion-label position="floating">Contraseña</ion-label>
+        <ion-label position="floating"
+          >{{'login.placeholderPassword' | translate}}</ion-label
+        >
         <ion-input
           type="password"
           formControlName="password"
@@ -29,7 +41,7 @@
             size="medium"
             expand="block"
             type="submit"
-            >Entrar</ion-button
+            >{{'login.login' | translate}}</ion-button
           >
         </ion-col>
       </ion-row>

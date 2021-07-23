@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="tertiary">
-    <ion-title>About</ion-title>
+    <ion-title></ion-title>
     <ion-buttons slot="start">
       <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
@@ -8,5 +8,74 @@
 </ion-header>
 
 <ion-content>
-  <!-- Content -->
+  <ion-row class="aboutTitleRow">
+    <ion-col size="8">
+      <ion-text class="aboutTitleText">{{"about.aboutus" |translate}}</ion-text>
+    </ion-col>
+    <ion-col size="4">
+      <ion-img
+        src="../../../../assets/img/programmer.png"
+        style="height: 100px; width: 100px"
+      ></ion-img>
+    </ion-col>
+  </ion-row>
+  <ion-row class="aboutTitleRow">
+    <ion-text class="aboutDescriptionText"
+      ><div [innerHTML]="'about.description' | translate"></div>
+    </ion-text>
+  </ion-row>
+  <ion-row class="aboutTitleRow" style="padding-top: 8%">
+    <ion-col size="6">
+      <ion-img src="../../../../assets/img/ionic.png"></ion-img>
+    </ion-col>
+    <ion-col size="6" style="text-align: right">
+      <ion-text class="aboutSkillsText"
+        >{{"about.skills" | translate}}</ion-text
+      >
+    </ion-col>
+  </ion-row>
+  <ion-row style="padding: 3% 3% 0% 3%">
+    <ion-col class="aboutIcon">
+      <ion-img
+        class="aboutIconImg"
+        src="../../../../assets/img/angularT.png"
+      ></ion-img>
+    </ion-col>
+    <ion-col class="aboutIcon">
+      <ion-img
+        class="aboutIconImg"
+        src="../../../../assets/img/javascriptHTMLCss.png"
+      ></ion-img>
+    </ion-col>
+    <ion-col class="aboutIcon">
+      <ion-img
+        class="aboutIconImg"
+        src="../../../../assets/img/firebase.png"
+      ></ion-img>
+    </ion-col>
+    <ion-col class="aboutIcon">
+      <ion-img
+        class="aboutIconImg"
+        src="../../../../assets/img/capacitor.png"
+      ></ion-img>
+    </ion-col>
+  </ion-row>
+  <ion-row style="padding: 0% 5% 0% 5%">
+    <ion-col class="aboutTxt">
+      <ion-text class="aboutIconTxt">Angular / Typescript</ion-text>
+    </ion-col>
+    <ion-col class="aboutTxt">
+      <ion-text class="aboutIconTxt">Javascript HTML CSS</ion-text>
+    </ion-col>
+    <ion-col class="aboutTxt">
+      <ion-text class="aboutIconTxt">Firebase</ion-text>
+    </ion-col>
+    <ion-col class="aboutTxt">
+      <ion-text class="aboutIconTxt">Capacitor</ion-text>
+    </ion-col>
+  </ion-row>
+  <ion-row class="githubLogo"
+    ><a href="https://github.com/martaboteller/FixamApp"
+      ><ion-icon size="large" name="logo-github"></ion-icon></a
+  ></ion-row>
 </ion-content>

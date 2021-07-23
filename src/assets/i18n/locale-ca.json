@@ -1,0 +1,62 @@
+{
+  "welcome": {
+    "toolbar": "Benvinguts a Fixa'm!",
+    "login": "Login",
+    "registration": "Registre"
+  },
+  "registration": {
+    "toolbar": "Registre d'un nou usuari",
+    "placeholderUser": "Usuari",
+    "placeholderName": "Nom",
+    "placeholderSurnames": "Cognoms",
+    "placeholderEmail": "Correu-e",
+    "placeholderPassword": "Contrasenya",
+    "register": "Registrar"
+  },
+  "login": {
+    "toolbar": "Accés",
+    "placeholderEmail": "Correu-e",
+    "placeholderPassword": "Contrasenya",
+    "login": "Entrar"
+  },
+  "menu": {
+    "toolbar": "Hola, ",
+    "captures": "Captures",
+    "settings": "Configuració",
+    "about": "Sobre",
+    "logout": "Sortir"
+  },
+  "list": {
+    "toolbar": "",
+    "list": "Llista",
+    "map": "Mapa"
+  },
+  "detail": {
+    "toolbar": "Detall",
+    "placeholderTitle": "Títol",
+    "placeholderDescription": "Descripció",
+    "latitude": "Latitud",
+    "longitude": "Longitud",
+    "edit": "Editar",
+    "save": "Guardar",
+    "deleteQuestion": "Vols eliminar la captura?",
+    "yes": "si",
+    "no": "no"
+  },
+  "userSettings": {
+    "toolbar": "El meu perfil",
+    "description": "Aquí podràs actualitzar el teu perfil",
+    "changeButton": "Canviar Avatar",
+    "addButton": "Afegir Avatar",
+    "name": "Nom",
+    "surnames": "Cognoms",
+    "nickname": "Usuari",
+    "save": "Guardar"
+  },
+  "about": {
+    "toolbar": "",
+    "aboutus": "Sobre nosaltres",
+    "description": "Som estudiants del curs organitzat per <a href='https://twitter.com/cifo_barcelona?lang=ca'>@CIFO_Barcelona</a>  aprenent a desenvolupar aplicacions híbrides amb IONIC. En aquest curs hem desenvolupat aquesta aplicació com a projecte final amb les següents característiques: tabs, sidemenu, ús de cámera i geolocalització, persistència de dades i connexió amb Firebase, entre d'altres.",
+    "skills": "Habilitats Adquirides"
+  }
+}

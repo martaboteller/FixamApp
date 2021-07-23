@@ -1,0 +1,65 @@
+{
+  "welcome": {
+    "toolbar": "Bienvenidos a Fixa'm!",
+    "login": "Login",
+    "registration": "Registro"
+  },
+  "registration": {
+    "toolbar": "Registro de nuevo usuario",
+    "placeholderUser": "Usuario",
+    "placeholderName": "Nombre",
+    "placeholderSurnames": "Apellidos",
+    "placeholderEmail": "Email",
+    "placeholderPassword": "Contraseña",
+    "register": "Registrar"
+  },
+  "login": {
+    "toolbar": "Acceder",
+    "placeholderEmail": "Email",
+    "placeholderPassword": "Contraseña",
+    "login": "Entrar"
+  },
+  "menu": {
+    "toolbar": "Hola, ",
+    "captures": "Capturas",
+    "settings": "Configuración",
+    "about": "Sobre",
+    "logout": "Salir"
+  },
+  "list": {
+    "toolbar": "",
+    "list": "Lista",
+    "map": "Mapa"
+  },
+  "detail": {
+    "toolbar": "Detalle",
+    "placeholderTitle": "Título",
+    "placeholderDescription": "Descripción",
+    "latitude": "Latitud",
+    "longitude": "Longitud",
+    "edit": "Editar",
+    "save": "Guardar",
+    "deleteQuestion": "Quieres eliminar la captura?",
+    "yes": "si",
+    "no": "no"
+  },
+  "map": {
+    "toolbar": "Mapa"
+  },
+  "userSettings": {
+    "toolbar": "Mi perfil",
+    "description": "Aquí podrás actualizar tu perfil",
+    "changeButton": "Cambiar Avatar",
+    "addButton": "Añadir Avatar",
+    "name": "Nombre",
+    "surnames": "Apellidos",
+    "nickname": "Usuario",
+    "save": "Guardar"
+  },
+  "about": {
+    "toolbar": "",
+    "aboutus": "Sobre nosotros",
+    "description": "Somos estudiantes del curso organizado por <a href='https://twitter.com/cifo_barcelona?lang=ca'> @CIFO_Barcelona </a>  aprendiendo a desarrollar aplicaciones híbridas con IONIC. En este curso hemos desarrollado esta aplicación como proyecto final con las siguientes características: tabs, sidemenu, uso de cámara y geolocalización, persistencia de datos y conexión con Firebase, entre otros.",
+    "skills": "Habilidades Adquiridas"
+  }
+}

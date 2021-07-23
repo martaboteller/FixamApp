@@ -1,0 +1,65 @@
+{
+  "welcome": {
+    "toolbar": "Welcome to Fixa'm!",
+    "login": "Login",
+    "registration": "Register"
+  },
+  "registration": {
+    "toolbar": "Create new user",
+    "placeholderUser": "User",
+    "placeholderName": "Name",
+    "placeholderSurnames": "Surnames",
+    "placeholderEmail": "Email",
+    "placeholderPassword": "Password",
+    "register": "Register"
+  },
+  "login": {
+    "toolbar": "Login",
+    "placeholderEmail": "Email",
+    "placeholderPassword": "Password",
+    "login": "Go!"
+  },
+  "menu": {
+    "toolbar": "Hi, ",
+    "captures": "Captures",
+    "settings": "Settings",
+    "about": "About",
+    "logout": "Logout"
+  },
+  "list": {
+    "toolbar": "",
+    "list": "List",
+    "map": "Map"
+  },
+  "detail": {
+    "toolbar": "Detail",
+    "placeholderTitle": "Title",
+    "placeholderDescription": "Description",
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+    "edit": "Edit",
+    "save": "Save",
+    "deleteQuestion": "Do you want to delete this capture?",
+    "yes": "yes",
+    "no": "no"
+  },
+  "map": {
+    "toolbar": "Map"
+  },
+  "userSettings": {
+    "toolbar": "My profile",
+    "description": "Here you can update your profile",
+    "changeButton": "Change Avatar",
+    "addButton": "Add Avatar",
+    "name": "Name",
+    "surnames": "Surnames",
+    "nickname": "User",
+    "save": "Save"
+  },
+  "about": {
+    "toolbar": "",
+    "aboutus": "About us",
+    "description": "We are students of the course organized by <a href='https://twitter.com/cifo_barcelona?lang=ca'> @CIFO_Barcelona </a>  learning to develop hybrid applications with IONIC. In this course we have developed this application as a final project with the following characteristics: tabs, sidemenu, use of camera and geolocation, data persistence and connection with Firebase, among others.",
+    "skills": "Learning Skills"
+  }
+}

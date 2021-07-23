@@ -1,6 +1,8 @@
 <ion-header class="ion-no-border">
   <ion-toolbar color="tertiary">
-    <ion-title class="header_title"><p>Welcome page</p></ion-title>
+    <ion-title class="header_title"
+      ><p>{{'welcome.toolbar' | translate}}</p></ion-title
+    >
   </ion-toolbar>
 </ion-header>
 
@@ -15,7 +17,7 @@
         color="tertiary"
         routerLink="login"
         routerDirection="root"
-        >Login</ion-button
+        >{{'welcome.login' | translate}}</ion-button
       >
     </div>
     <div class="row" style="text-align: center; margin-top: 5%">
@@ -25,7 +27,7 @@
         size="medium"
         routerLink="registration"
         routerDirection="root"
-        >Registration</ion-button
+        >{{'welcome.registration' | translate}}</ion-button
       >
     </div>
   </div>

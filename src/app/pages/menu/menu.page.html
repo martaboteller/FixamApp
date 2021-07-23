@@ -3,15 +3,21 @@
     <!--Side menu zone-->
     <ion-menu contentId="content">
       <ion-header>
-        <ion-toolbar style="padding: 2%" color="primary">
+        <ion-toolbar style="padding: 2% 2% 5% 5%; height: 56px" color="primary">
           <ion-avatar slot="start" *ngIf="!userLogged.avatarURL">
-            <img src="../../../../assets/img/avatar_default.png" />
+            <img
+              style="height: 70%; width: 70%; vertical-align: middle"
+              src="../../../../assets/img/avatar_default.png"
+            />
           </ion-avatar>
           <ion-avatar slot="start" *ngIf="userLogged.avatarURL">
-            <img src="{{userLogged.avatarURL}}" />
+            <img
+              style="height: 70%; width: 70%; vertical-align: middle"
+              src="{{userLogged.avatarURL}}"
+            />
           </ion-avatar>
-          <ion-title class="menu-title"
-            >Hola, {{userLogged.username}}</ion-title
+          <ion-title style="vertical-align: middle; padding: 0% 2% 10% 2%"
+            >{{'menu.toolbar' | translate}} {{userLogged.username}}</ion-title
           >
         </ion-toolbar>
       </ion-header>
@@ -37,22 +43,35 @@
             (click)="logout()"
             routerDirection="root"
           >
-            <ion-icon name="log-out" slot="start"> </ion-icon>Logout</ion-item
+            <ion-icon name="log-out" slot="start"> </ion-icon>{{'menu.logout' |
+            translate}}</ion-item
           >
         </ion-list>
       </ion-content>
-      <ion-list>
-        <ion-item style="padding-bottom: 2%" lines="none">
-          <ion-icon slot="start" name="moon"></ion-icon>
-          <ion-label> Toggle Dark Theme </ion-label>
+      <ion-item lines="full"></ion-item>
+      <ion-item style="display: inline-flex; margin-left: 0px">
+        <ion-item
+          lines="none"
+          style="text-align: left; font-size: small; width: 120px"
+        >
+          <ion-icon name="language-outline" size="small"></ion-icon>&nbsp;
+          <ion-select [(ngModel)]="language" (ionChange)="languageChange()">
+            <ion-select-option value="ca">Català</ion-select-option>
+            <ion-select-option value="es">Español</ion-select-option>
+            <ion-select-option value="en">English</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item lines="none" style="text-align: right">
+          <ion-icon name="sunny-outline" size="small"></ion-icon>&nbsp;/&nbsp;
+          <ion-icon name="moon" size="small"></ion-icon>
+          &nbsp;
           <ion-toggle
             [(ngModel)]="darkValue"
             [checked]="darkValue"
             (ionChange)="setTheme($event)"
-            slot="end"
           ></ion-toggle>
         </ion-item>
-      </ion-list>
+      </ion-item>
     </ion-menu>
     <!--Page content-->
     <ion-router-outlet id="content" main> </ion-router-outlet>
@@ -62,7 +81,7 @@
     vertical="bottom"
     horizontal="center"
     slot="fixed"
-    style="margin-bottom: 15%"
+    style="padding-bottom: 15%"
   >
     <ion-fab-button (click)="takePhoto()">
       <ion-icon name="camera"></ion-icon>

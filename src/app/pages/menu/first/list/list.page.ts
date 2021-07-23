@@ -19,6 +19,7 @@ export class ListPage implements OnInit {
   public dislikeChecked: boolean = false;
   public showAllCaptures: boolean = true;
   user: User = {} as User;
+  public language: string = 'ca';
 
   constructor(
     private router: Router,
@@ -69,9 +70,9 @@ export class ListPage implements OnInit {
       });
   }
 
-  getUserLogged(){
+  getUserLogged() {
     this.usersService.getUserLogged().subscribe(
-      response => {
+      (response) => {
         this.user.name = response.name;
         this.user.surname = response.surname;
         this.user.username = response.username;
@@ -81,12 +82,11 @@ export class ListPage implements OnInit {
         this.user.avatarURL = response.avatarURL;
 
         this.usersService.sendUserData(this.user);
-        
       },
-      error => {
+      (error) => {
         console.log(error);
       }
-    )
+    );
   }
 
   //Given a uid get the username
