@@ -15,6 +15,9 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class ListPage implements OnInit {
   //Variables
   public listOfCaptures: Capture[];
+  public publicCaptures: Capture[];
+  public personalCaptures: Capture[];
+  public capturesToShow: Capture[];
   public listOfUsers: User[];
   public dislikeChecked: boolean = false;
   public showAllCaptures: boolean = true;
@@ -49,7 +52,39 @@ export class ListPage implements OnInit {
       )
       .subscribe((data) => {
         this.listOfCaptures = data;
+        this.filterPublicAndMyCaptures(this.authService.getToken());
       });
+  }
+
+  //Filter public and user captures
+  //Select only public captures and user's captures
+  filterPublicAndMyCaptures(uid: string): Capture[] {
+    this.publicCaptures = this.listOfCaptures.filter(
+      (capture) => capture.publicState == true
+    );
+    this.personalCaptures = this.listOfCaptures.filter(
+      (capture) => capture.uid === uid
+    );
+
+    this.capturesToShow = this.personalCaptures.concat(this.publicCaptures);
+    this.capturesToShow = this.removeDuplicates(this.capturesToShow);
+    return this.capturesToShow;
+  }
+
+  //Remove captures duplicated
+  removeDuplicates(inArray): Capture[] {
+    var arr = inArray.concat(); // create a clone from inArray so not to change input array
+    //create the first cycle of the loop starting from element 0 or n
+    for (var i = 0; i < arr.length; ++i) {
+      //create the second cycle of the loop from element n+1
+      for (var j = i + 1; j < arr.length; ++j) {
+        //if the two elements are equal , then they are duplicate
+        if (arr[i] === arr[j]) {
+          arr.splice(j, 1); //remove the duplicated element
+        }
+      }
+    }
+    return arr;
   }
 
   //Call usersService and retrieve users from Firebase
@@ -114,7 +149,7 @@ export class ListPage implements OnInit {
     } else {
       console.log('Show only my captures');
       this.showAllCaptures = false;
-      this.listOfCaptures = this.capturesService.filterCapturesByUser(
+      this.capturesToShow = this.capturesService.filterCapturesByUser(
         this.authService.getToken()
       );
     }

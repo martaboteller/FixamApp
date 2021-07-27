@@ -5,6 +5,7 @@ import {
   AngularFirestoreCollection,
 } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,10 @@ export class CapturesService {
   public listOfCoordinates: MapMarker[] = [];
   success: boolean = false;
 
-  constructor(private angularFirestore: AngularFirestore) {}
+  constructor(
+    private angularFirestore: AngularFirestore,
+    private auth: AuthService
+  ) {}
 
   //Get all collections of captures from Firebase
   getCapturesFromFirebase(): AngularFirestoreCollection<Capture> {
@@ -75,7 +79,11 @@ export class CapturesService {
       this.getCapturesFromFirebase();
       this.saveCapturesToArray();
       const name = this.filterCaptureById(idCapture).name;
-      return true;
+      if (name === '') {
+        return false;
+      } else {
+        return true;
+      }
     } catch (e) {
       return false;
     }

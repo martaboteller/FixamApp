@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "636720841226",
+    "firebase_url": "https://fixam-b9324-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "fixam-b9324",
+    "storage_bucket": "fixam-b9324.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:636720841226:android:5ee367ddede5e7ee1715f3",
+        "android_client_info": {
+          "package_name": "com.cifocourse.fixam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "636720841226-te27lho1auva9l5464pmutos535bi7k7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALBpvgS-zUBkcFGqa9o0TIU_PLiq5__WQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "636720841226-te27lho1auva9l5464pmutos535bi7k7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

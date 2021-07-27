@@ -37,19 +37,33 @@
           *ngIf="isDesktopWide(); else isMobileWide "
           style="text-align: center; padding: 5% 5% 0% 0%"
         >
-          <ion-button *ngIf="!user.avatarURL" (click)="openModal()">
+          <ion-button
+            *ngIf="!user.avatarURL"
+            (click)="openModal()"
+            color="tertiary"
+          >
             <ion-icon name="add-circle"></ion-icon> &nbsp;
             {{'userSettings.addButton' | translate}}
           </ion-button>
-          <ion-button *ngIf="user.avatarURL" (click)="openModal()"
+          <ion-button
+            *ngIf="user.avatarURL"
+            (click)="openModal()"
+            color="tertiary"
             >{{'userSettings.changeButton' | translate}}</ion-button
           >
         </div>
         <ng-template #isMobileWide>
-          <ion-button *ngIf="!user.avatarURL" (click)="openModal()">
+          <ion-button
+            *ngIf="!user.avatarURL"
+            (click)="openModal()"
+            color="tertiary"
+          >
             <ion-icon name="add-circle"></ion-icon>
           </ion-button>
-          <ion-button *ngIf="user.avatarURL" (click)="openModal()"
+          <ion-button
+            *ngIf="user.avatarURL"
+            (click)="openModal()"
+            color="tertiary"
             ><ion-icon name="add-circle"></ion-icon
           ></ion-button>
         </ng-template>
@@ -78,7 +92,7 @@
             <ion-input type="text" formControlName="username"></ion-input>
           </ion-item>
         </ion-item-group>
-        <ion-button type="submit" style="margin: 7% 0% 7% 0%"
+        <ion-button style="margin: 7% 0% 7% 0%" color="tertiary" type="submit"
           >{{'userSettings.save' | translate}}</ion-button
         >
       </form>

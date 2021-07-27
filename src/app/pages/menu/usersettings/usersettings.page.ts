@@ -116,17 +116,24 @@ export class UsersettingsPage implements OnInit {
     const avatar = await (await modal).onWillDismiss();
 
     if (avatar.data) {
-      this.userService.deleteAvatar(this.user).subscribe(
-        (response) => {
-          this.user.avatarFilename = avatar.data.filename;
-          this.user.avatarURL = avatar.data.imageURL;
-          const changeAvatar = true;
-          this.saveAvatarData();
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+      if (this.user.avatarFilename != null && this.user.avatarURL != null) {
+        this.userService.deleteAvatar(this.user).subscribe(
+          (response) => {
+            this.user.avatarFilename = avatar.data.filename;
+            this.user.avatarURL = avatar.data.imageURL;
+            const changeAvatar = true;
+            this.saveAvatarData();
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      } else {
+        this.user.avatarFilename = avatar.data.filename;
+        this.user.avatarURL = avatar.data.imageURL;
+        const changeAvatar = true;
+        this.saveAvatarData();
+      }
     }
   }
 

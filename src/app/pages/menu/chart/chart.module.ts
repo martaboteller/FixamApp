@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { MenuPageRoutingModule } from './menu-routing.module';
-import { MenuPage } from './menu.page';
+import { ChartPageRoutingModule } from './chart-routing.module';
+import { ChartPage } from './chart.page';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { ChartPageModule } from './chart/chart.module';
+import { ChartsModule } from 'ng2-charts';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/locale-', '.json');
@@ -18,7 +18,7 @@ export function createTranslateLoader(http: HttpClient) {
     CommonModule,
     FormsModule,
     IonicModule,
-    MenuPageRoutingModule,
+    ChartPageRoutingModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,
@@ -26,7 +26,8 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient],
       },
     }),
+    ChartsModule,
   ],
-  declarations: [MenuPage],
+  declarations: [ChartPage],
 })
-export class MenuPageModule {}
+export class ChartPageModule {}

@@ -45,7 +45,7 @@
               <div class="detailDate">
                 {{activeCapture.date | date:'short'}}
               </div>
-              <div class="detailUser">{{getUsername(activeCapture.uid)}}</div>
+              <div class="detailUser">{{activeUsername}}</div>
             </div>
           </div>
         </ion-col>
@@ -75,20 +75,21 @@
           </div>
         </ion-col>
         <ion-col size="2" class="detailToggle">
-          <div *ngIf="editable || belongsToUser;else elseBlockToggle">
+          <div *ngIf="editable && belongsToUser;else elseBlockToggle">
             <ion-toggle
               formControlName="publicToggleEditable"
               color="tertiary"
               [checked]="activeCapture.publicState"
               [(ngModel)]="activeCapture.publicState"
-              disabled="false"
+              [disabled]="false"
             ></ion-toggle>
           </div>
-          <ng-template #elseBlockToggle *ngIf="belongsToUser">
+          <ng-template #elseBlockToggle>
             <ion-toggle
+              *ngIf="belongsToUser"
               color="tertiary"
               [checked]="activeCapture.publicState"
-              disabled="true"
+              [disabled]="true"
             ></ion-toggle
           ></ng-template>
         </ion-col>

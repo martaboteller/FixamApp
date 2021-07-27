@@ -1,12 +1,31 @@
 <ion-header>
   <ion-toolbar>
-    <ion-button slot="end" style="margin-right: 5%" (click)="dismissModal()"
-      >Cerrar</ion-button
-    >
+    <ion-label style="padding-left: 5%; font-weight: bold">{{
+      modalTitle
+    }}</ion-label>
   </ion-toolbar>
 </ion-header>
 
-<ion-content style="padding: 5%">
-  <ion-label position="floating">Selecciona una imagen</ion-label>
-  <ion-input type="file" (change)="verifyFile($event)"></ion-input>
+<ion-content style="padding: 50%">
+  <div style="padding: 6% 0% 0% 0%; width: 100%">
+    <ion-input
+      type="file"
+      style="padding-top: 10%"
+      (change)="onFileSelected($event)"
+    ></ion-input>
+  </div>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button
+      slot="start"
+      style="margin-left: 5%"
+      (click)="verifyFile($event)"
+      >{{ uploadButton }}</ion-button
+    >
+    <ion-button slot="end" style="margin-right: 5%" (click)="dismissModal()">{{
+      closeButton
+    }}</ion-button>
+  </ion-toolbar>
+</ion-footer>

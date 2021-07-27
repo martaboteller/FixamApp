@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>94058402983-gr6qdu1a8ovbqhniipfj8gaemqep9v41.apps.googleusercontent.com</string>
+	<string>636720841226-kgm0suc9aj7montcsmrc3kjmpfubohj9.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.94058402983-gr6qdu1a8ovbqhniipfj8gaemqep9v41</string>
+	<string>com.googleusercontent.apps.636720841226-kgm0suc9aj7montcsmrc3kjmpfubohj9</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDBzBpnwSG0HvUrIM_8EhrlO7CrMMQTG5M</string>
+	<string>AIzaSyBI1rhNOZ5IKSNR34yyYZ8za4Ugy1lKxaM</string>
 	<key>GCM_SENDER_ID</key>
-	<string>94058402983</string>
+	<string>636720841226</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.cifocourse.fixam</string>
 	<key>PROJECT_ID</key>
-	<string>fixamappmb</string>
+	<string>fixam-b9324</string>
 	<key>STORAGE_BUCKET</key>
-	<string>fixamappmb.appspot.com</string>
+	<string>fixam-b9324.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:94058402983:ios:84a481f2ea19f4bb743782</string>
+	<string>1:636720841226:ios:ffb8bd89bb539e3f1715f3</string>
 	<key>DATABASE_URL</key>
-	<string>https://fixamappmb-default-rtdb.europe-west1.firebasedatabase.app</string>
+	<string>https://fixam-b9324-default-rtdb.europe-west1.firebasedatabase.app</string>
 </dict>
 </plist>

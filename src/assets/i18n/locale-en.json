@@ -23,6 +23,7 @@
     "toolbar": "Hi, ",
     "captures": "Captures",
     "settings": "Settings",
+    "chart": "Statistics",
     "about": "About",
     "logout": "Logout"
   },
@@ -32,7 +33,7 @@
     "map": "Map"
   },
   "detail": {
-    "toolbar": "Detail",
+    "toolbar": "",
     "placeholderTitle": "Title",
     "placeholderDescription": "Description",
     "latitude": "Latitude",
@@ -44,10 +45,10 @@
     "no": "no"
   },
   "map": {
-    "toolbar": "Map"
+    "toolbar": ""
   },
   "userSettings": {
-    "toolbar": "My profile",
+    "toolbar": "",
     "description": "Here you can update your profile",
     "changeButton": "Change Avatar",
     "addButton": "Add Avatar",
@@ -61,5 +62,23 @@
     "aboutus": "About us",
     "description": "We are students of the course organized by <a href='https://twitter.com/cifo_barcelona?lang=ca'> @CIFO_Barcelona </a>  learning to develop hybrid applications with IONIC. In this course we have developed this application as a final project with the following characteristics: tabs, sidemenu, use of camera and geolocation, data persistence and connection with Firebase, among others.",
     "skills": "Learning Skills"
+  },
+  "chart": {
+    "title": "Top 5 ranked",
+    "xAxes": "user",
+    "yAxes": "# of votes",
+    "votes": "votes"
+  },
+  "avatarModal": {
+    "select": "Select an image",
+    "uploadButton": "Upload",
+    "closeButton": "Close",
+    "errorMsg": "Error",
+    "errorNotSelected": "There is no selected image",
+    "errorType": "Only .jpeg/.png images are accepted"
+  },
+  "detailAlert": {
+    "error": "Error",
+    "msg": "Title and description are missing"
   }
 }

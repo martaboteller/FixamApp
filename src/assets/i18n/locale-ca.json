@@ -23,6 +23,7 @@
     "toolbar": "Hola, ",
     "captures": "Captures",
     "settings": "Configuració",
+    "chart": "Estadístiques",
     "about": "Sobre",
     "logout": "Sortir"
   },
@@ -32,7 +33,7 @@
     "map": "Mapa"
   },
   "detail": {
-    "toolbar": "Detall",
+    "toolbar": "",
     "placeholderTitle": "Títol",
     "placeholderDescription": "Descripció",
     "latitude": "Latitud",
@@ -43,8 +44,11 @@
     "yes": "si",
     "no": "no"
   },
+  "map": {
+    "toolbar": ""
+  },
   "userSettings": {
-    "toolbar": "El meu perfil",
+    "toolbar": "",
     "description": "Aquí podràs actualitzar el teu perfil",
     "changeButton": "Canviar Avatar",
     "addButton": "Afegir Avatar",
@@ -58,5 +62,23 @@
     "aboutus": "Sobre nosaltres",
     "description": "Som estudiants del curs organitzat per <a href='https://twitter.com/cifo_barcelona?lang=ca'>@CIFO_Barcelona</a>  aprenent a desenvolupar aplicacions híbrides amb IONIC. En aquest curs hem desenvolupat aquesta aplicació com a projecte final amb les següents característiques: tabs, sidemenu, ús de cámera i geolocalització, persistència de dades i connexió amb Firebase, entre d'altres.",
     "skills": "Habilitats Adquirides"
+  },
+  "chart": {
+    "title": "Els 5 més votats",
+    "xAxes": "usuari",
+    "yAxes": "# de vots",
+    "votes": "vots"
+  },
+  "avatarModal": {
+    "select": "Selecciona una imatge",
+    "uploadButton": "Pujar",
+    "closeButton": "Tancar",
+    "errorMsg": "Error",
+    "errorNotSelected": "No hi ha cap imatge seleccionada",
+    "errorType": "Només s'admeten imatges en format .jpeg/.png"
+  },
+  "detailAlert": {
+    "error": "Error",
+    "msg": "Falta el títol i la descripció"
   }
 }

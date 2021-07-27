@@ -7,6 +7,7 @@ import { AlertController, NavParams, ToastController } from '@ionic/angular';
 import { UsersService } from 'src/app/services/users/users.service';
 import { CameraService } from 'src/app/services/camera/camera.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-detail',
@@ -24,6 +25,7 @@ export class DetailPage implements OnInit {
   belongsToUser: boolean = false;
   detailForm: FormGroup;
   dislikeChecked: boolean = false;
+  activeUsername: string;
 
   constructor(
     private capturesService: CapturesService,
@@ -31,10 +33,10 @@ export class DetailPage implements OnInit {
     private usersService: UsersService,
     private route: ActivatedRoute,
     private router: Router,
-
     private toast: ToastController,
     private alertController: AlertController,
-    private authService: AuthService
+    private authService: AuthService,
+    private translateService: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -72,29 +74,43 @@ export class DetailPage implements OnInit {
         this.idCapture
       );
     }
+    this.activeUsername = this.usersService.filterUserByUid(
+      this.activeCapture.uid
+    );
   }
 
-  getUsername(uid: string): string {
+  /*  getUsername(uid: string): string {
     return this.usersService.filterUserByUid(uid);
-  }
+  }*/
 
   //Update capture when 'Save' button is clicked
   saveActiveCapture(): void {
-    const savedCapture: Capture = {
-      imageUrl: this.activeCapture.imageUrl,
-      idCapture: this.activeCapture.idCapture,
-      latitude: this.activeCapture.latitude,
-      longitude: this.activeCapture.longitude,
-      date: String(new Date()),
-      description: this.activeCapture.description,
-      name: this.activeCapture.name,
-      publicState: this.activeCapture.publicState,
-      uid: this.activeCapture.uid,
-      votes: this.activeCapture.votes,
-      dislikeChecked: this.activeCapture.dislikeChecked,
-    };
-    this.saveCapture(savedCapture);
-    this.router.navigate(['../../menu/first/list']);
+    if (
+      this.activeCapture.name === '' ||
+      this.activeCapture.description === ''
+    ) {
+      this.viewAlert(
+        this.translateService.instant('detailAlert.error'),
+        this.translateService.instant('detailAlert.msg')
+      );
+    } else {
+      const savedCapture: Capture = {
+        imageUrl: this.activeCapture.imageUrl,
+        idCapture: this.activeCapture.idCapture,
+        latitude: this.activeCapture.latitude,
+        longitude: this.activeCapture.longitude,
+        date: String(new Date()),
+        description: this.activeCapture.description,
+        name: this.activeCapture.name,
+        publicState: this.activeCapture.publicState,
+        uid: this.activeCapture.uid,
+        votes: this.activeCapture.votes,
+        dislikeChecked: this.activeCapture.dislikeChecked,
+      };
+
+      this.saveCapture(savedCapture);
+      this.router.navigate(['../../menu/first/list']);
+    }
   }
 
   //Save capture at Firebase
@@ -198,5 +214,13 @@ export class DetailPage implements OnInit {
       this.deleteCaptureIfNotSaved();
     }
     this.router.navigate(['../../menu/first/list']);
+  }
+
+  async viewAlert(header: string, msg: string) {
+    const alert = this.alertController.create({
+      header: header,
+      message: msg,
+    });
+    (await alert).present();
   }
 }

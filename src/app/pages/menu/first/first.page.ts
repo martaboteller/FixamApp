@@ -18,14 +18,15 @@ export class FirstPage implements OnInit {
 
   ngOnInit() {
     //If accessed by web no notifications available
-    const isPushNotificationsAvailable =
+    /*const isPushNotificationsAvailable =
       Capacitor.isPluginAvailable('PushNotifications');
     if (isPushNotificationsAvailable) {
       this.initPushNotifications();
-    }
+    }*/
   }
 
-  initPushNotifications() {
+  //TODO
+  /*initPushNotifications() {
     // Request permission to use push notifications
     // iOS will prompt user and return if they granted permission or not
     // Android will just grant without prompting
@@ -64,5 +65,5 @@ export class FirstPage implements OnInit {
         alert('Push action performed: ' + JSON.stringify(notification));
       }
     );
-  }
+  }*/
 }

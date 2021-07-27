@@ -8,6 +8,7 @@ import { CameraService } from 'src/app/services/camera/camera.service';
 
 import { ThemeColorsService } from 'src/app/services/themeColors/themeColors.service';
 import { UsersService } from 'src/app/services/users/users.service';
+import { ChartPage } from './chart/chart.page';
 
 @Component({
   selector: 'app-menu',
@@ -23,6 +24,9 @@ export class MenuPage implements OnInit {
   darkValue: any;
   photoReturn: Capture;
   subscription: Subscription;
+  xAxes: string;
+  yAxes: string;
+  votes: string;
 
   pages = [
     {
@@ -34,6 +38,11 @@ export class MenuPage implements OnInit {
       title: this.translateService.instant('menu.settings'),
       url: '/menu/usersettings',
       icon: 'settings-outline',
+    },
+    {
+      title: this.translateService.instant('menu.chart'),
+      url: '/menu/chart',
+      icon: 'bar-chart-outline',
     },
     {
       title: this.translateService.instant('menu.about'),
@@ -50,18 +59,19 @@ export class MenuPage implements OnInit {
     private router: Router,
     private themeColorsService: ThemeColorsService,
     private userService: UsersService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private chartPage: ChartPage
   ) {
     this.router.events.subscribe((event: RouterEvent) => {
       if (event && event.url) {
         this.selectedPath = event.url;
       }
     });
-    this.getUserData();
   }
 
   ngOnInit() {
     this.darkValue = this.darkBookean;
+    this.getUserData();
   }
 
   async takePhoto() {
@@ -100,7 +110,7 @@ export class MenuPage implements OnInit {
     this.themeColorsService.setAppTheme(ev.detail.checked);
   }
 
-  languageChange() {
+  async languageChange() {
     this.translateService.use(this.language);
 
     this.translateService.get('menu.captures').subscribe((trad) => {
@@ -111,8 +121,26 @@ export class MenuPage implements OnInit {
       this.pages[1].title = trad;
     });
 
-    this.translateService.get('menu.about').subscribe((trad) => {
+    this.translateService.get('menu.chart').subscribe((trad) => {
       this.pages[2].title = trad;
     });
+
+    this.translateService.get('menu.about').subscribe((trad) => {
+      this.pages[3].title = trad;
+    });
+
+    this.translateService.get('chart.xAxes').subscribe((trad) => {
+      this.xAxes = trad;
+    });
+
+    this.translateService.get('chart.yAxes').subscribe((trad) => {
+      this.yAxes = trad;
+    });
+
+    this.translateService.get('chart.votes').subscribe((trad) => {
+      this.votes = trad;
+    });
+
+    //this.chartPage.updateLangChanges(this.xAxes, this.yAxes, this.votes);
   }
 }

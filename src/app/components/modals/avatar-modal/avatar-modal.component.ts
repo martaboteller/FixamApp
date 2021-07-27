@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
@@ -8,43 +9,66 @@ import { UsersService } from 'src/app/services/users/users.service';
   styleUrls: ['./avatar-modal.component.scss'],
 })
 export class AvatarModalComponent {
+  public imageFile: File;
+  public modalTitle = this.translateService.instant('avatarModal.select');
+  public uploadButton = this.translateService.instant(
+    'avatarModal.uploadButton'
+  );
+  public closeButton = this.translateService.instant('avatarModal.closeButton');
 
   constructor(
     private modalControl: ModalController,
     private alertControl: AlertController,
-    private userService: UsersService
-  ) { }
+    private userService: UsersService,
+    private translateService: TranslateService
+  ) {}
 
-  dismissModal(){
+  dismissModal() {
     this.modalControl.dismiss(null);
   }
 
-  verifyFile(event){
-    const image: File = event.target.files[0];
-
-    if(image.type == 'image/jpeg' || image.type == 'image/png'){
-      this.uploadAvatar(image);
-    }else{
-      this.viewAlert();
+  onFileSelected(event) {
+    if (event.target.files.length > 0) {
+      this.imageFile = event.target.files[0];
     }
   }
 
-  async uploadAvatar(image: File){
-    await this.userService.uploadAvatar(image).then(
-      response => {
-        this.modalControl.dismiss(response);
+  verifyFile(event) {
+    try {
+      if (
+        this.imageFile.type == 'image/jpeg' ||
+        this.imageFile.type == 'image/png'
+      ) {
+        this.uploadAvatar(this.imageFile);
+      } else {
+        this.viewAlert(
+          this.translateService.instant('avatarModal.errorMsg'),
+          this.translateService.instant('avatarModal.errorType')
+        );
       }
-    ).catch(
-      error => {
-        console.log(error)
-      }
-    );
+    } catch {
+      this.viewAlert(
+        this.translateService.instant('avatarModal.errorMsg'),
+        this.translateService.instant('avatarModal.errorNotSelected')
+      );
+    }
   }
 
-  async viewAlert(){
+  async uploadAvatar(image: File) {
+    await this.userService
+      .uploadAvatar(image)
+      .then((response) => {
+        this.modalControl.dismiss(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  async viewAlert(header: string, msg: string) {
     const alert = this.alertControl.create({
-      header: 'Error',
-      message: 'Solo se admiten imagenes en formato .jpeg o .png'
+      header: header,
+      message: msg,
     });
 
     (await alert).present();

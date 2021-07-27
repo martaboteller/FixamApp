@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-title></ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-row style="text-align: center; display: block; padding: 5%">
+    <ion-text style="font-size: x-large; font-weight: bold"
+      >{{'chart.title' | translate}}</ion-text
+    >
+  </ion-row>
+
+  <div
+    style="
+      display: block;
+      padding: 5%;
+      margin: 0% 5% 0% 5%;
+      background-color: whitesmoke;
+    "
+  >
+    <canvas
+      style="background-color: whitesmoke"
+      name="myCanvas"
+      baseChart
+      [datasets]="barChartData"
+      [labels]="barChartLabels"
+      [options]="barChartOptions"
+      [plugins]="barChartPlugins"
+      [legend]="barChartLegend"
+      [chartType]="barChartType"
+      (chartClick)="chartClicked($event)"
+    >
+    </canvas>
+  </div>
+</ion-content>

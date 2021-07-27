@@ -1,35 +1,42 @@
 {
   "project_info": {
-    "project_number": "636720841226",
-    "firebase_url": "https://fixam-b9324-default-rtdb.europe-west1.firebasedatabase.app",
-    "project_id": "fixam-b9324",
-    "storage_bucket": "fixam-b9324.appspot.com"
+    "project_number": "94058402983",
+    "firebase_url": "https://fixamappmb-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "fixamappmb",
+    "storage_bucket": "fixamappmb.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:636720841226:android:5ee367ddede5e7ee1715f3",
+        "mobilesdk_app_id": "1:94058402983:android:ed8433d3cb1b6c72743782",
         "android_client_info": {
           "package_name": "com.cifocourse.fixam"
         }
       },
       "oauth_client": [
         {
-          "client_id": "636720841226-te27lho1auva9l5464pmutos535bi7k7.apps.googleusercontent.com",
+          "client_id": "94058402983-rv35je2j4m6d7lqgb6kl8k3ehdogjf05.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyALBpvgS-zUBkcFGqa9o0TIU_PLiq5__WQ"
+          "current_key": "AIzaSyAyYb3K6m79fP_wP4x4xnp5bmu_PieA3NE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "636720841226-te27lho1auva9l5464pmutos535bi7k7.apps.googleusercontent.com",
+              "client_id": "94058402983-rv35je2j4m6d7lqgb6kl8k3ehdogjf05.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "94058402983-gr6qdu1a8ovbqhniipfj8gaemqep9v41.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.cifocourse.fixam"
+              }
             }
           ]
         }

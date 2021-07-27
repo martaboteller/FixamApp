@@ -9,7 +9,8 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'menu', canActivate: [AuthGuardGuard],
+    path: 'menu',
+    canActivate: [AuthGuardGuard],
     loadChildren: () =>
       import('./pages/menu/menu.module').then((m) => m.MenuPageModule),
   },
