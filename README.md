@@ -1,9 +1,8 @@
 # Fixa'm App
 
-// To change!
-
-
+<div class ="inline-block">
  <img src="https://github.com/martaboteller/FixamApp/blob/master/threeSmartPhones.png?raw=true" width="700" height="500">
+</div>
  
 This is the final project of a course entitled <i>Desenvolupament d'aplicacions per a dispositius Android, IOS i PWA (FS17-21)</i> carried out at CIFO School thanks to a grant from the Generalitat of Catalonia and the European Union.
 
@@ -13,9 +12,9 @@ It works in a very easy and intuitive way: a registered user takes a photo, adds
 
 <div id="banner">
     <div class="inline-block">
-  <img src="https://github.com/martaboteller/MyPlacesPublic/blob/master/MyPlaces/imagesForReadme/PQTM.png?raw=true" width="100" height="50" > 
+  <img src="https://github.com/martaboteller/MyPlacesPublic/blob/master/MyPlaces/imagesForReadme/PQTM.png?raw=true" width="130" height="50" > 
   <img src="https://github.com/martaboteller/FixamApp/blob/master/cifo.png?raw=true" width="50" height="50" hspace="30"> 
-  <img src="https://github.com/martaboteller/FixamApp/blob/master/ue.png?raw=true" width="250" height="50" hspace="30"> 
+  <img src="https://github.com/martaboteller/FixamApp/blob/master/ue.png?raw=true" width="350" height="50" hspace="30"> 
   </div>
 </div>
 
@@ -36,15 +35,15 @@ The following features have been added to this project:
 This project has been integrated with the following components of [Firebase](https://firebase.google.com/): Authentication, Firestore Database, Storage and Hosting. Google Maps Platform has been used to display the map.  
 
 
-## Project deliveries (PLA 1 - 5)
+## Project deliveries 
 
 > This project has been released in 5 deliveries identified as PLA 1, PLA 2, PLA 3, PLA 4 and PLA 5.
 
-** PLA 1: Learning the difference between programming only with typescript file vs integration with angular
-** PLA 2: Creating a simple Ionic angular app (using capacitor)
-** PLA 3: External calls to data and data management
-** PLA 4: Device integration
-** PLA 5: Integration with Google Firebase and Deploys
+* PLA 1: Learning the difference between programming only with typescript file vs integration with angular
+* PLA 2: Creating a simple Ionic angular app (using capacitor)
+* PLA 3: External calls to data and data management
+* PLA 4: Device integration
+* PLA 5: Integration with Google Firebase and Deploys
 
 
 
@@ -54,9 +53,11 @@ Please find below the screen views designed for this project:
 
  <div id="banner">
     <div class="inline-block">
-       <img src="https://github.com/martaboteller/FixamApp/blob/master/captures1.png?raw=true" width="100" height="200" title="pages">
-      <img src="https://github.com/martaboteller/FixamApp/blob/master/captures2.png?raw=true" width="100" height="200" title="Table Screen" hspace="5">
+       <img src="https://github.com/martaboteller/FixamApp/blob/master/captures1.png?raw=true" width="500" height="250" title="pages">
      </div>
+  <div class="inline-block>
+      <img src="https://github.com/martaboteller/FixamApp/blob/master/captures2.png?raw=true" width="500" height="250" title="pages">
+  </div>
 </div>
 &nbsp;
 
@@ -69,8 +70,8 @@ Please find below the screen views designed for this project:
 * XCode 12.4
 * Android Studio 4.2.1
 
-> Angular
- Package                         Version
+ Angular
+ Packages                        Version
 ---------------------------------------------------------
 @angular-devkit/architect       0.1201.2
 @angular-devkit/build-angular   12.1.2
@@ -84,27 +85,26 @@ typescript                      4.2.4
 
 
 ## Versioning
-
-First version of Fixam App finished on Jul 2021.
+First version of Fixam App finished on Jul 2021.                                                                                                                 &nbsp;&nbsp;
 
 ## Author
 
 * **Marta Boteller** - [Marta Boteller](https://github.com/martaboteller).
-
+&nbsp;&nbsp;
 
 ## Collaborator 
 
 * **Djklen306r** - [Djklen306](https://github.com/djklen306).
 Has contributed with the initial integration Firebase (login/registration) and the user settings page.
-
+&nbsp;&nbsp;
 
 ## Acknowledgments
-
 This could not have been done without the help of my [CIFO teacher](https://github.com/jrbistuer).
+&nbsp;&nbsp;
 
 ## Contact
-
-
 Please feel free to send me an email should you need further information.
 
 [https://martaboteller.com](https://martaboteller.com).
+
+&nbsp;&nbsp;
