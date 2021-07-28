@@ -35,7 +35,7 @@ The following features have been added to this project:
 This project has been integrated with the following components of [Firebase](https://firebase.google.com/): Authentication, Firestore Database, Storage and Hosting. Google Maps Platform has been used to display the map.  
 
 <div class ="inline-block" style="text-align:center">
- <img src="https://github.com/martaboteller/FixamApp/blob/master/firebaseIntegration.png?raw=true" width="700" height="300">
+ <img src="https://github.com/martaboteller/FixamApp/blob/master/firebaseIntegration.png?raw=true" width="600" height="300">
 </div>
 
 
