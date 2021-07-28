@@ -14,7 +14,7 @@ It works in a very easy and intuitive way: a registered user takes a photo, adds
     <div class="inline-block">
   <img src="https://github.com/martaboteller/MyPlacesPublic/blob/master/MyPlaces/imagesForReadme/PQTM.png?raw=true" width="130" height="50" > 
   <img src="https://github.com/martaboteller/FixamApp/blob/master/cifo.png?raw=true" width="50" height="50" hspace="30"> 
-  <img src="https://github.com/martaboteller/FixamApp/blob/master/ue.png?raw=true" width="350" height="50" hspace="30"> 
+  <img src="https://github.com/martaboteller/FixamApp/blob/master/ue.png?raw=true" width="400" height="50" hspace="30"> 
   </div>
 </div>
 
@@ -37,7 +37,7 @@ This project has been integrated with the following components of [Firebase](htt
 
 ## Project deliveries 
 
-> This project has been released in 5 deliveries identified as PLA 1, PLA 2, PLA 3, PLA 4 and PLA 5.
+> This project has been released in 5 deliveries.
 
 * PLA 1: Learning the difference between programming only with typescript file vs integration with angular
 * PLA 2: Creating a simple Ionic angular app (using capacitor)
@@ -54,10 +54,9 @@ Please find below the screen views designed for this project:
  <div id="banner">
     <div class="inline-block">
        <img src="https://github.com/martaboteller/FixamApp/blob/master/captures1.png?raw=true" width="500" height="250" title="pages">
+       <img src="https://github.com/martaboteller/FixamApp/blob/master/captures2.png?raw=true" width="500" height="250" title="pages">
      </div>
-  <div class="inline-block>
-      <img src="https://github.com/martaboteller/FixamApp/blob/master/captures2.png?raw=true" width="500" height="250" title="pages">
-  </div>
+  
 </div>
 &nbsp;
 
