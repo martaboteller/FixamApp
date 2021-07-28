@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ModalController, ToastController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { AvatarModalComponent } from 'src/app/components/modals/avatar-modal/avatar-modal.component';
 import { User } from 'src/app/interfaces/interfaces';
 import { UsersService } from 'src/app/services/users/users.service';
@@ -16,6 +17,7 @@ import { UsersService } from 'src/app/services/users/users.service';
   styleUrls: ['./usersettings.page.scss'],
 })
 export class UsersettingsPage implements OnInit {
+  //Variables
   user: User = {} as User;
   updateForm: FormGroup;
   isADesktop: boolean = false;
@@ -24,7 +26,8 @@ export class UsersettingsPage implements OnInit {
     private userService: UsersService,
     private modalControl: ModalController,
     private toast: ToastController,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private translateService: TranslateService
   ) {
     this.getUserLogged();
   }
@@ -44,7 +47,6 @@ export class UsersettingsPage implements OnInit {
   isDesktopWide(): boolean {
     if (window.innerWidth > 1000) {
       this.isADesktop = true;
-      //console.log('I am in a desktop!');
     }
     return this.isADesktop;
   }
@@ -64,7 +66,7 @@ export class UsersettingsPage implements OnInit {
           console.log(error);
         });
     } else {
-      const message = 'Formulario incompleto';
+      const message = this.translateService.instant('userSettings.incomplete');
       this.presentToast(message);
     }
   }
@@ -110,11 +112,11 @@ export class UsersettingsPage implements OnInit {
       component: AvatarModalComponent,
       cssClass: 'my-custom-modal-css',
     });
-
     await (await modal).present();
 
     const avatar = await (await modal).onWillDismiss();
 
+    //Check if user has already an avatar
     if (avatar.data) {
       if (this.user.avatarFilename != null && this.user.avatarURL != null) {
         this.userService.deleteAvatar(this.user).subscribe(
@@ -137,6 +139,7 @@ export class UsersettingsPage implements OnInit {
     }
   }
 
+  //Generic toast
   async presentToast(message: string) {
     const toast = await this.toast.create({
       message: message,

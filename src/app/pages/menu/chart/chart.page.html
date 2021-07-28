@@ -8,32 +8,53 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-row style="text-align: center; display: block; padding: 5%">
-    <ion-text style="font-size: x-large; font-weight: bold"
-      >{{'chart.title' | translate}}</ion-text
-    >
-  </ion-row>
-
-  <div
-    style="
-      display: block;
-      padding: 5%;
-      margin: 0% 5% 0% 5%;
-      background-color: whitesmoke;
-    "
-  >
-    <canvas
-      style="background-color: whitesmoke"
-      name="myCanvas"
-      baseChart
-      [datasets]="barChartData"
-      [labels]="barChartLabels"
-      [options]="barChartOptions"
-      [plugins]="barChartPlugins"
-      [legend]="barChartLegend"
-      [chartType]="barChartType"
-      (chartClick)="chartClicked($event)"
-    >
-    </canvas>
-  </div>
+  <ion-grid>
+    <ion-row style="text-align: center; display: block; padding: 5%">
+      <ion-text style="font-size: x-large; font-weight: bold"
+        >{{'chart.title' | translate}}</ion-text
+      >
+    </ion-row>
+    <ion-row style="padding: 5% 5% 0% 5%">
+      <ion-col
+        size="1"
+        style="padding: 20% 0% 0% 2%; background-color: whitesmoke"
+      >
+        {{'chart.yAxes' | translate}}</ion-col
+      >
+      <ion-col
+        size="11"
+        style="
+          display: block;
+          text-align: center;
+          padding: 2% 1% 0% 0%;
+          background-color: whitesmoke;
+        "
+      >
+        <canvas
+          style="background-color: whitesmoke"
+          name="myCanvas"
+          baseChart
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [plugins]="barChartPlugins"
+          [legend]="barChartLegend"
+          [chartType]="barChartType"
+          (chartClick)="chartClicked($event)"
+        >
+        </canvas
+      ></ion-col>
+    </ion-row>
+    <ion-row style="padding: 0% 5% 0% 5%"
+      ><ion-col
+        style="
+          text-align: center;
+          padding: 1% 5% 1% 5%;
+          background-color: whitesmoke;
+        "
+      >
+        {{'chart.xAxes' | translate}}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

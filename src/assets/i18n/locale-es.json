@@ -55,7 +55,8 @@
     "name": "Nombre",
     "surnames": "Apellidos",
     "nickname": "Usuario",
-    "save": "Guardar"
+    "save": "Guardar",
+    "incomplete": "Formulario incompleto"
   },
   "about": {
     "toolbar": "",
@@ -65,7 +66,7 @@
   },
   "chart": {
     "title": "Los 5 más votados",
-    "xAxes": "ususario",
+    "xAxes": "ususarios",
     "yAxes": "# de votos",
     "votes": "votos"
   },

@@ -21,14 +21,14 @@ export class ChartPage implements OnInit {
   public clicks: number = 0;
   public clickedI: number;
 
+  //x & y labels displaied in html dynamically
   public barChartOptions: ChartOptions = {
     responsive: true,
-
     scales: {
       xAxes: [
         {
           scaleLabel: {
-            display: true,
+            display: false,
             labelString: this.translateService.instant('chart.xAxes'),
           },
         },
@@ -37,7 +37,7 @@ export class ChartPage implements OnInit {
         {
           ticks: { min: 0, max: 200 },
           scaleLabel: {
-            display: true,
+            display: false,
             labelString: this.translateService.instant('chart.yAxes'),
           },
         },
@@ -77,13 +77,6 @@ export class ChartPage implements OnInit {
     this.retriveData(this.getTopFiveCaptures());
   }
 
-  updateLangChanges(xAxes: string, yAxes: string, votes: string) {
-    this.barChartOptions.scales.xAxes[0].scaleLabel.labelString = xAxes;
-    this.barChartOptions.scales.yAxes[0].scaleLabel.labelString = yAxes;
-    this.barChartData[0].label = votes;
-    this.reloadComponent();
-  }
-
   //Get the top 5 captures
   getTopFiveCaptures(): Capture[] {
     this.topCaptures = this.listOfCaptures.sort((a, b) => b.votes - a.votes);
@@ -91,6 +84,7 @@ export class ChartPage implements OnInit {
     return this.topCaptures;
   }
 
+  //Get data from the top 5 captures
   retriveData(topCaptures: Capture[]) {
     for (var _i = 0; _i < 4; _i++) {
       this.usernames[_i] = this.usersService.filterUserByUid(
@@ -102,20 +96,10 @@ export class ChartPage implements OnInit {
     this.barChartLabels = this.usernames;
   }
 
-  goToDetailFromChart(index: number) {}
-
-  reloadComponent() {
-    //let currentUrl = this.router.url;
-    //let currentUrl = '/menu/chart';
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.onSameUrlNavigation = 'reload';
-    //this.router.navigate([currentUrl]);
-  }
-
+  //If bar chart clicked accumulate clicks, when double click got to detail
   chartClicked(ev) {
     this.clicks = this.clicks + 1;
     var indEx = ev.active[0]._index;
-
     if (this.clicks > 1 && this.clickedI === indEx) {
       var i = ev.active[0]._index;
       var imageUrl = this.topCaptures[i].imageUrl;

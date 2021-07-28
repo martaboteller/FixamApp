@@ -5,10 +5,8 @@ import { Subscription } from 'rxjs';
 import { Capture, User } from 'src/app/interfaces/interfaces';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CameraService } from 'src/app/services/camera/camera.service';
-
 import { ThemeColorsService } from 'src/app/services/themeColors/themeColors.service';
 import { UsersService } from 'src/app/services/users/users.service';
-import { ChartPage } from './chart/chart.page';
 
 @Component({
   selector: 'app-menu',
@@ -59,8 +57,7 @@ export class MenuPage implements OnInit {
     private router: Router,
     private themeColorsService: ThemeColorsService,
     private userService: UsersService,
-    private translateService: TranslateService,
-    private chartPage: ChartPage
+    private translateService: TranslateService
   ) {
     this.router.events.subscribe((event: RouterEvent) => {
       if (event && event.url) {
@@ -140,7 +137,5 @@ export class MenuPage implements OnInit {
     this.translateService.get('chart.votes').subscribe((trad) => {
       this.votes = trad;
     });
-
-    //this.chartPage.updateLangChanges(this.xAxes, this.yAxes, this.votes);
   }
 }

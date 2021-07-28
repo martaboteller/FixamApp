@@ -210,7 +210,7 @@ export class DetailPage implements OnInit {
   back() {
     //If capture has not been saved delete photo
     if (!this.capturesService.doesExist(this.idCapture)) {
-      console.log('Exists? ' + this.capturesService.doesExist(this.idCapture));
+      //console.log('Exists? ' + this.capturesService.doesExist(this.idCapture));
       this.deleteCaptureIfNotSaved();
     }
     this.router.navigate(['../../menu/first/list']);

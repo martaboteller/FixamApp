@@ -93,7 +93,7 @@ export class CapturesService {
   getAllLocations(): MapMarker[] {
     if (this.capturesFromFirebase.length === 0) {
       this.getCapturesFromFirebase();
-      console.log('Empty captures list');
+      //console.log('Empty captures list');
     }
     for (let i = 0; i < this.capturesFromFirebase.length; i++) {
       this.listOfCoordinates.push({
@@ -113,7 +113,6 @@ export class CapturesService {
     if (this.listOfCoordinates.length === 0) {
       this.getAllLocations();
     }
-    console.log(this.listOfCoordinates.length.toString);
     return this.listOfCoordinates.filter(
       (mapMarker) => mapMarker.idCapture === +idCapture
     )[0];

@@ -28,6 +28,7 @@ export class CameraService {
   ) {}
 
   //Take a photo with the camera and save it at Firebase
+  //Important don't allow edition here!
   async takePhoto(): Promise<any> {
     const image: Photo = await Camera.getPhoto({
       quality: 100,

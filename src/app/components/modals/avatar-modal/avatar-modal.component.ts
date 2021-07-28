@@ -9,6 +9,7 @@ import { UsersService } from 'src/app/services/users/users.service';
   styleUrls: ['./avatar-modal.component.scss'],
 })
 export class AvatarModalComponent {
+  //Variables
   public imageFile: File;
   public modalTitle = this.translateService.instant('avatarModal.select');
   public uploadButton = this.translateService.instant(
@@ -27,12 +28,14 @@ export class AvatarModalComponent {
     this.modalControl.dismiss(null);
   }
 
+  //Retrive imageFile when input selected
   onFileSelected(event) {
     if (event.target.files.length > 0) {
       this.imageFile = event.target.files[0];
     }
   }
 
+  //Verify if imageFile has correct format if necessary show alert
   verifyFile(event) {
     try {
       if (
@@ -54,6 +57,7 @@ export class AvatarModalComponent {
     }
   }
 
+  //Upload avatar using userService
   async uploadAvatar(image: File) {
     await this.userService
       .uploadAvatar(image)
@@ -65,12 +69,12 @@ export class AvatarModalComponent {
       });
   }
 
+  //Generic alert
   async viewAlert(header: string, msg: string) {
     const alert = this.alertControl.create({
       header: header,
       message: msg,
     });
-
     (await alert).present();
   }
 }

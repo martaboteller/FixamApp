@@ -55,7 +55,8 @@
     "name": "Name",
     "surnames": "Surnames",
     "nickname": "User",
-    "save": "Save"
+    "save": "Save",
+    "incomplete": "Incomplete form"
   },
   "about": {
     "toolbar": "",
@@ -65,7 +66,7 @@
   },
   "chart": {
     "title": "Top 5 ranked",
-    "xAxes": "user",
+    "xAxes": "users",
     "yAxes": "# of votes",
     "votes": "votes"
   },
