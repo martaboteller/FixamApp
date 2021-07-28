@@ -3,17 +3,13 @@
 // To change!
 
 
- <img src="https://github.com/martaboteller/MyPlacesPublic/blob/master/MyPlaces/imagesForReadme/pinkIphonewithApp.png?raw=true" width="500" height="450">
+ <img src="https://github.com/martaboteller/FixamApp/blob/master/threeSmartPhones.png?raw=true" width="500" height="500">
  
-This is the final project of a course entitled <i>IOS Application Developer</i> carried out at the UOC university thanks to a 
-grant from the Generalitat of Catalonia and the European Union.
+This is the final project of a course entitled <i>Desenvolupament d'aplicacions per a dispositius Android, IOS i PWA (FS17-21)</i> carried out at CIFO School thanks to a grant from the Generalitat of Catalonia and the European Union.
 
-The initial idea of this app has been created by the course organizers. Based on that initial idea I have created my own verion of MyPlacess app. 
+The general idea of this application is to allow registered users to share captured photos with the intention of reporting defects and promoting the proper use of public and/or community facilities. At the same time this webapp will hopefully facilitate consensus and attract attention by the competent authorities.
 
-With this application a registered user can save preferred places and their info (name, description, type, localization and image). Places can be displayed as a table or distributed on a map. In addition, an image can be saved for each place. 
-
-An administrator view with the user's information will be added in further deliveries of this project. 
-
+It works in a very easy and intuitive way: a registered user takes a photo, adds a caption title and a description. This capture can be stored as public or private. It is possible to view the collection of captures in a list or on a map. Each user can see their own captures and the public ones, and, at the same time  they can give a "vote" to each capture.
 
 <div id="banner">
     <div class="inline-block">
@@ -24,26 +20,34 @@ An administrator view with the user's information will be added in further deliv
 
 &nbsp;
 
-## Getting Started
+## Features 
 
-Cocoapods have been used in this project. Please refer to the following [guide] (https://guides.cocoapods.org/using/using-cocoapods)
-if you need help adding pods to your XCode project.
+The following features have been added to this project: 
+* Sidemenu
+* Tabs
+* Action with camera
+* Geolocalization and use of maps
+* Login/Registration integrated with external database
+* Views: list, detail (editable form)
+* Data persistance
+* Graphics
 
-More information about Firebase configuration can be found [here](https://firebase.google.com/docs/ios/setup).
-
-### List of Used Pods
-
-* pod 'GoogleMaps'
-* pod 'GooglePlaces'
-* pod 'Firebase'
-* pod 'Firebase/Core'
-* pod 'Firebase/Storage'
-* pod 'Firebase/Database'
-* pod 'Firebase/Auth'
-* pod 'DropDown', '2.3.4'
+This project has been integrated with the following components of [Firebase](https://firebase.google.com/): Authentication, Firestore Database, Storage and Hosting. Google Maps Platform has been used to display the map.  
 
 
-## Deployment
+### Project deliveries (PLA 1 - 5)
+
+This project has been released in 5 deliveries identified as PLA 1, PLA 2, PLA 3, PLA 4 and PLA 5.
+
+> PLA 1: Learning the difference between programming only with typescript file vs integration with angular
+> PLA 2: Creating a simple Ionic angular app (using capacitor)
+> PLA 3: External calls to data and data management
+> PLA 4: Device integration
+> PLA 5: Integration with Google Firebase and Deploys
+
+
+
+## Pages
 
 Please find below the screen views designed for this project:
 
@@ -60,20 +64,6 @@ Please find below the screen views designed for this project:
 </div>
 &nbsp;
 
-### Project Deliveries (PLA 1 - 4)
-
-This project has been released in 4 deliveries identified as PLA 1, PLA 2, PLA 3 and PLA 4.
-
-<img src="https://github.com/martaboteller/MyPlacesPublic/blob/master/MyPlaces/imagesForReadme/pla1234.png?raw=true" width="600" height="300" title="Forgotten Password Screen">
-
-#### Pla 1
-First contact with XCode and design of an app skeleton.
-#### Pla 2
-Graphical interface design. 
-#### Pla 3
-Learning to use JSON. Maps. 
-#### Pla 4
-Including CocoaPods (Firebase, Google Maps). 
 
 &nbsp;
 
@@ -86,19 +76,9 @@ Including CocoaPods (Firebase, Google Maps).
 
 &nbsp;
 
-### Accessing the App
-
-Firebase has been used as a backend connection to store user's data. Two possible ways to access the app: as a registered user and as a guest. But only registered users can save, edit and remove places.
-
-On the image below, a registered user can access MyPlaces app (center), a new registration can be done (left) and a lost password can be retreived (right).
-
-<img src="https://github.com/martaboteller/MyPlacesPublic/blob/master/MyPlaces/imagesForReadme/flowApp.png" width="350" height="350" title="Accessing the App" hspace="50">
-
-All functions related to Firebase will be found at file <i>PlaceServices.swift</i>.
 
 
-
-### Result
+### Contact
 
 
 Please feel free to send me an email should you need further information.
@@ -107,20 +87,41 @@ Please feel free to send me an email should you need further information.
 
 ## Built With
 
-* XCode 10.1
-* Swift 4.2
-* Platform IOS 12.0
+* Visual Studio Code 1.58.2  
+* Sourcetree 4.1.1
+* XCode 12.4
+* Android Studio 4.2.1
+
+* Angular
+ Package                         Version
+---------------------------------------------------------
+@angular-devkit/architect       0.1201.2
+@angular-devkit/build-angular   12.1.2
+@angular-devkit/core            12.1.2
+@angular-devkit/schematics      12.1.2
+@angular/fire                   6.1.5
+@angular/service-worker         12.1.3
+@schematics/angular             12.1.2
+rxjs                            6.6.7
+typescript                      4.2.4
+
 
 ## Versioning
 
-First version of MyPlaces App finished on Dec 2018.
+First version of Fixam App finished on Jul 2021.
 
 ## Authors
 
 * **Marta Boteller** - [Marta Boteller](https://github.com/martaboteller).
 
 
+## Collaborator 
+
+* **Djklen306r** - [Djklen306](https://github.com/djklen306).
+Has contributed with the initial integration Firebase (login/registration) and the user settings page.
+
+
 ## Acknowledgments
 
-This could not have been done without the help of my [UOC teacher](https://github.com/almata).
+This could not have been done without the help of my [CIFO teacher](https://github.com/jrbistuer).
 
