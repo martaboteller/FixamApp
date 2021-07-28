@@ -98,7 +98,7 @@ First version of Fixam App finished on Jul 2021.                                
 ## Collaborator 
 
 * **Djklen306r** - [Djklen306](https://github.com/djklen306).
-Has contributed with the initial integration Firebase (login/registration) and the user settings page.
+Has contributed with the initial integration Firebase (login/registration/saving captures) and the user settings page.
 &nbsp;&nbsp;
 
 ## Acknowledgments
