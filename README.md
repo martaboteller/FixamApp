@@ -1,4 +1,4 @@
-# Fixa'm App
+# Fixa'm
 
 <div class ="inline-block">
  <img src="https://github.com/martaboteller/FixamApp/blob/master/threeSmartPhones.png?raw=true" width="700" height="500">
